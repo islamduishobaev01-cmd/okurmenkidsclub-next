@@ -1,0 +1,1855 @@
+<!DOCTYPE html>
+<html lang="ru" data-lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OKURMEN KIDS CLUB — NEXT</title>
+<meta name="description" content="Okurmen Kids Club — NEXT: 6-месячная программа, где ребёнок создаёт собственный IT-продукт.">
+
+<!-- ============ CDN: Bootstrap 5 + Icons + Fonts ============ -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* =======================================================================
+   OKURMEN KIDS CLUB — NEXT
+   Design tokens
+   Palette:
+     --navy      #0A0A16  base background (deep space navy)
+     --purple    #1F1136  panel background (deep purple)
+     --violet    #7C4DFF  primary accent (violet)
+     --violet-2  #A78BFA  secondary violet (lighter, for gradients/glow)
+     --gold      #F5A623  accent / CTA (orange-gold)
+     --gold-2    #FFD37A  gold highlight
+     --ink       #F2EEFB  primary text on dark
+     --muted     #B4ACD1  secondary text on dark
+     --line      rgba(255,255,255,.08) hairline borders
+   Type:
+     Display : 'Sora'          — headlines, numbers, brand
+     Body    : 'Inter'         — paragraphs, UI
+     Mono    : 'JetBrains Mono'— code snippets / tech tags / stage numbers
+   Signature element:
+     "Student Journey" — a horizontal scroll-driven rail
+     (LEARN → BUILD → CREATE → PRESENT → NEXT LEVEL) that lights up
+     station by station as the user scrolls, echoing the 6-stage
+     roadmap and closing the whole page on one motif: progress as light.
+   ======================================================================= */
+
+:root{
+  --navy:#0A0A16;
+  --navy-2:#0D0C1F;
+  --purple:#1F1136;
+  --purple-2:#2A1650;
+  --violet:#7C4DFF;
+  --violet-2:#A78BFA;
+  --gold:#F5A623;
+  --gold-2:#FFD37A;
+  --ink:#F2EEFB;
+  --muted:#B4ACD1;
+  --muted-2:#8B84AC;
+  --line:rgba(255,255,255,.09);
+  --glass:rgba(255,255,255,.05);
+  --radius:20px;
+  --container:1200px;
+}
+
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  margin:0;
+  background:var(--navy);
+  color:var(--ink);
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--violet);color:#fff;}
+
+h1,h2,h3,h4,.display-font{
+  font-family:'Sora',sans-serif;
+  letter-spacing:-0.02em;
+}
+.mono{font-family:'JetBrains Mono',monospace;}
+
+a{text-decoration:none;color:inherit;}
+img{max-width:100%;}
+.container-nx{max-width:var(--container);margin:0 auto;padding:0 24px;}
+
+/* focus visibility for a11y */
+a:focus-visible,button:focus-visible,.btn:focus-visible{
+  outline:2px solid var(--gold);
+  outline-offset:3px;
+  border-radius:6px;
+}
+
+/* ---------- background ambience ---------- */
+.bg-orbs{
+  position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;
+}
+.orb{
+  position:absolute;border-radius:50%;filter:blur(90px);opacity:.35;
+}
+.orb-1{width:520px;height:520px;background:var(--violet);top:-140px;left:-120px;}
+.orb-2{width:460px;height:460px;background:var(--gold);bottom:-160px;right:-100px;opacity:.18;}
+.orb-3{width:380px;height:380px;background:var(--violet-2);top:40%;right:10%;opacity:.14;}
+
+.grain{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size:3px 3px;
+  mix-blend-mode:overlay;
+}
+
+section{position:relative;z-index:2;padding:110px 0;}
+@media (max-width:768px){section{padding:70px 0;}}
+
+/* ---------- eyebrow / labels ---------- */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'JetBrains Mono',monospace;
+  font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold-2);
+  background:rgba(245,166,35,.08);
+  border:1px solid rgba(245,166,35,.25);
+  padding:6px 14px;border-radius:999px;
+  margin-bottom:18px;
+}
+.eyebrow i{font-size:.85rem;}
+
+.section-title{
+  font-size:clamp(1.8rem,4vw,2.7rem);
+  font-weight:700;
+  color:#fff;
+  margin-bottom:14px;
+}
+.section-sub{
+  color:var(--muted);
+  font-size:1.05rem;
+  max-width:640px;
+}
+.section-head{margin-bottom:56px;}
+.section-head.text-center .section-sub{margin-left:auto;margin-right:auto;}
+
+/* ---------- glass card ---------- */
+.glass-card{
+  background:linear-gradient(160deg, rgba(255,255,255,.055), rgba(255,255,255,.02));
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+}
+.glass-card:hover{
+  transform:translateY(-6px);
+  border-color:rgba(124,77,255,.4);
+  box-shadow:0 24px 60px -20px rgba(124,77,255,.35);
+}
+
+.btn-nx{
+  font-family:'Sora',sans-serif;font-weight:600;
+  padding:14px 30px;border-radius:999px;font-size:.98rem;
+  display:inline-flex;align-items:center;gap:10px;
+  border:1px solid transparent;transition:all .3s ease;
+  white-space:nowrap;
+}
+.btn-nx-primary{
+  background:linear-gradient(120deg,var(--gold),var(--gold-2));
+  color:#1a0f00;
+  box-shadow:0 10px 30px -8px rgba(245,166,35,.55);
+}
+.btn-nx-primary:hover{transform:translateY(-2px);box-shadow:0 16px 36px -8px rgba(245,166,35,.7);color:#1a0f00;}
+.btn-nx-ghost{
+  background:rgba(255,255,255,.04);
+  border:1px solid var(--line);
+  color:var(--ink);
+}
+.btn-nx-ghost:hover{background:rgba(255,255,255,.09);border-color:rgba(124,77,255,.5);color:#fff;}
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+.nx-navbar{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:18px 0;
+  transition:background .35s ease, padding .35s ease, border-color .35s ease;
+  border-bottom:1px solid transparent;
+}
+.nx-navbar.scrolled{
+  padding:12px 0;
+  background:rgba(10,10,22,.72);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+.nx-navbar .container-nx{display:flex;align-items:center;justify-content:space-between;gap:20px;}
+
+.nx-logo{display:flex;align-items:center;gap:10px;font-family:'Sora',sans-serif;font-weight:700;color:#fff;font-size:1.05rem;}
+.nx-logo-mark{
+  width:38px;height:38px;border-radius:11px;
+  background:linear-gradient(135deg,var(--violet),var(--gold));
+  display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:1rem;color:#fff;flex-shrink:0;
+  box-shadow:0 6px 18px -4px rgba(124,77,255,.6);
+}
+
+.nx-nav-links{display:flex;align-items:center;gap:34px;}
+.nx-nav-links a{
+  font-size:.92rem;color:var(--muted);position:relative;padding:4px 0;
+  transition:color .25s ease;
+}
+.nx-nav-links a::after{
+  content:'';position:absolute;left:0;bottom:-4px;width:0;height:2px;
+  background:linear-gradient(90deg,var(--violet),var(--gold));
+  transition:width .25s ease;
+}
+.nx-nav-links a:hover,.nx-nav-links a.active{color:#fff;}
+.nx-nav-links a:hover::after,.nx-nav-links a.active::after{width:100%;}
+
+.nx-lang-switch{
+  display:flex;align-items:center;background:rgba(255,255,255,.05);
+  border:1px solid var(--line);border-radius:999px;padding:4px;gap:2px;
+}
+.nx-lang-switch button{
+  border:none;background:transparent;color:var(--muted);
+  font-family:'JetBrains Mono',monospace;font-size:.8rem;font-weight:600;
+  padding:6px 12px;border-radius:999px;cursor:pointer;transition:all .25s ease;
+}
+.nx-lang-switch button.active{background:linear-gradient(120deg,var(--violet),#5B2FE0);color:#fff;}
+
+.nx-right{display:flex;align-items:center;gap:16px;}
+.nx-burger{display:none;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;}
+
+@media (max-width:991px){
+  .nx-nav-links{display:none;}
+  .nx-burger{display:block;}
+  .btn-nx-nav-cta{display:none;}
+}
+
+/* mobile menu panel */
+.nx-mobile-panel{
+  position:fixed;top:0;right:0;height:100vh;width:min(320px,84vw);
+  background:rgba(13,12,31,.98);backdrop-filter:blur(20px);
+  border-left:1px solid var(--line);
+  z-index:1100;transform:translateX(100%);transition:transform .4s ease;
+  padding:26px 24px;display:flex;flex-direction:column;gap:26px;
+}
+.nx-mobile-panel.open{transform:translateX(0);}
+.nx-mobile-panel a{font-size:1.05rem;color:var(--ink);padding:8px 0;}
+.nx-mobile-close{align-self:flex-end;background:none;border:none;color:#fff;font-size:1.6rem;}
+.nx-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:1050;opacity:0;pointer-events:none;transition:opacity .35s ease;}
+.nx-overlay.show{opacity:1;pointer-events:auto;}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero{padding-top:170px;padding-bottom:80px;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;color:var(--violet-2);
+  font-family:'JetBrains Mono',monospace;font-size:.8rem;letter-spacing:.1em;
+  text-transform:uppercase;background:rgba(124,77,255,.1);
+  border:1px solid rgba(124,77,255,.3);padding:7px 16px;border-radius:999px;margin-bottom:22px;
+}
+.hero h1{
+  font-size:clamp(2.3rem,5.4vw,4rem);font-weight:800;color:#fff;line-height:1.05;margin-bottom:6px;
+}
+.hero .hero-next{
+  display:block;font-size:clamp(2.6rem,7vw,5.2rem);
+  background:linear-gradient(120deg,var(--violet-2),var(--gold-2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  font-weight:800;letter-spacing:-.03em;margin-top:-6px;
+}
+.hero-subtitle{font-size:1.25rem;color:var(--ink);font-weight:500;margin:22px 0 10px;}
+.hero-text{color:var(--muted);font-size:1.05rem;max-width:520px;line-height:1.7;margin-bottom:34px;}
+.hero-ctas{display:flex;gap:16px;flex-wrap:wrap;}
+
+/* dashboard visual */
+.hero-visual{position:relative;perspective:1400px;}
+.nx-dashboard{
+  background:linear-gradient(160deg,rgba(255,255,255,.07),rgba(255,255,255,.015));
+  border:1px solid var(--line);border-radius:22px;padding:0;overflow:hidden;
+  box-shadow:0 40px 90px -30px rgba(0,0,0,.6), 0 0 0 1px rgba(124,77,255,.08);
+  transform:rotateY(-8deg) rotateX(4deg);
+  transition:transform .5s ease;
+}
+.hero-visual:hover .nx-dashboard{transform:rotateY(-3deg) rotateX(1deg);}
+.nx-dashboard-bar{
+  display:flex;align-items:center;gap:8px;padding:14px 18px;
+  background:rgba(255,255,255,.04);border-bottom:1px solid var(--line);
+}
+.nx-dashboard-bar span{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.15);}
+.nx-dashboard-bar span:nth-child(1){background:#ff5f57;}
+.nx-dashboard-bar span:nth-child(2){background:#febc2e;}
+.nx-dashboard-bar span:nth-child(3){background:#28c840;}
+.nx-dashboard-title{margin-left:10px;font-family:'JetBrains Mono',monospace;font-size:.78rem;color:var(--muted-2);}
+.nx-dashboard-body{padding:22px;font-family:'JetBrains Mono',monospace;font-size:.85rem;line-height:1.9;}
+.nx-code-line{color:var(--muted);}
+.nx-code-key{color:var(--gold-2);}
+.nx-code-str{color:#8CE0C0;}
+.nx-code-fn{color:var(--violet-2);}
+
+.float-card{
+  position:absolute;background:rgba(20,16,40,.85);border:1px solid var(--line);
+  border-radius:14px;padding:10px 16px;font-family:'JetBrains Mono',monospace;
+  font-size:.85rem;font-weight:600;backdrop-filter:blur(10px);
+  box-shadow:0 14px 30px -10px rgba(0,0,0,.5);
+  animation:floaty 5s ease-in-out infinite;
+  display:flex;align-items:center;gap:8px;z-index:5;
+}
+.fc-react{top:-18px;right:-10px;color:#61DAFB;animation-delay:.2s;}
+.fc-python{bottom:60px;left:-30px;color:#FFD966;animation-delay:1s;}
+.fc-fastapi{bottom:-20px;right:30px;color:#8CE0C0;animation-delay:1.6s;}
+.fc-ai{top:40%;left:-40px;color:var(--gold-2);animation-delay:2.2s;}
+@keyframes floaty{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+@media (max-width:991px){.float-card{display:none;}}
+
+/* =========================================================
+   QUICK STATS
+   ========================================================= */
+.stats-strip{padding:50px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);}
+.stat-item{text-align:center;}
+.stat-num{
+  font-family:'Sora',sans-serif;font-weight:800;font-size:clamp(2.4rem,5vw,3.4rem);
+  background:linear-gradient(120deg,#fff,var(--violet-2));-webkit-background-clip:text;background-clip:text;color:transparent;
+  line-height:1;
+}
+.stat-label{color:var(--muted);font-size:.92rem;margin-top:8px;}
+
+/* =========================================================
+   WHY NEXT — flow + cards
+   ========================================================= */
+.flow-rail{
+  display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;
+  margin:0 auto 60px;max-width:900px;
+}
+.flow-step{
+  font-family:'JetBrains Mono',monospace;font-size:.85rem;letter-spacing:.06em;
+  padding:10px 20px;border-radius:999px;border:1px solid var(--line);
+  background:rgba(255,255,255,.04);color:var(--ink);
+}
+.flow-step.is-final{background:linear-gradient(120deg,var(--violet),#5B2FE0);border-color:transparent;color:#fff;}
+.flow-arrow{color:var(--muted-2);font-size:1.1rem;}
+
+.why-card{padding:32px 26px;height:100%;}
+.why-icon{
+  width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,rgba(124,77,255,.25),rgba(245,166,35,.2));
+  font-size:1.4rem;color:var(--gold-2);margin-bottom:20px;
+}
+.why-card h4{color:#fff;font-size:1.15rem;margin-bottom:10px;}
+.why-card p{color:var(--muted);font-size:.94rem;line-height:1.65;margin:0;}
+
+/* =========================================================
+   ROADMAP — signature-adjacent timeline
+   ========================================================= */
+.roadmap-wrap{position:relative;}
+.roadmap-rail-desktop{display:none;}
+@media (min-width:992px){
+  .roadmap-rail-desktop{display:block;position:relative;padding-top:20px;}
+  .roadmap-line{
+    position:absolute;top:70px;left:4%;right:4%;height:2px;
+    background:linear-gradient(90deg, var(--violet), var(--gold));
+    opacity:.35;
+  }
+  .roadmap-track{display:flex;justify-content:space-between;gap:18px;}
+  .roadmap-node{flex:1;position:relative;}
+}
+.roadmap-card{
+  padding:28px 22px;height:100%;cursor:pointer;
+}
+.roadmap-num{
+  font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.6rem;
+  color:var(--gold-2);margin-bottom:14px;display:block;
+}
+.roadmap-dot{
+  width:14px;height:14px;border-radius:50%;background:var(--navy);
+  border:3px solid var(--violet);margin:0 auto 18px;
+  position:relative;z-index:2;
+}
+.roadmap-card h4{color:#fff;font-size:1.05rem;margin-bottom:4px;}
+.roadmap-card .rm-tag{color:var(--violet-2);font-size:.82rem;font-family:'JetBrains Mono',monospace;margin-bottom:12px;display:block;}
+.roadmap-card p{color:var(--muted);font-size:.88rem;line-height:1.6;margin-bottom:14px;}
+.roadmap-project{
+  font-size:.8rem;color:var(--gold-2);display:flex;align-items:center;gap:6px;
+  border-top:1px dashed var(--line);padding-top:12px;
+}
+.roadmap-mobile{display:flex;flex-direction:column;gap:20px;}
+@media (min-width:992px){.roadmap-mobile{display:none;}}
+
+/* =========================================================
+   PROJECTS
+   ========================================================= */
+.project-card{padding:0;overflow:hidden;cursor:pointer;height:100%;display:flex;flex-direction:column;}
+.project-thumb{
+  height:150px;display:flex;align-items:center;justify-content:center;font-size:2.6rem;
+  background:linear-gradient(140deg,var(--purple-2),var(--navy-2));
+  position:relative;overflow:hidden;
+}
+.project-thumb::after{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(circle at 30% 20%, rgba(124,77,255,.35), transparent 60%);
+}
+.project-thumb i{position:relative;z-index:1;color:var(--gold-2);}
+.project-body{padding:22px;flex:1;display:flex;flex-direction:column;}
+.project-body h4{color:#fff;font-size:1.08rem;margin-bottom:6px;}
+.project-body p{color:var(--muted);font-size:.88rem;margin-bottom:14px;}
+.project-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;}
+.project-tags span{
+  font-family:'JetBrains Mono',monospace;font-size:.72rem;padding:4px 10px;border-radius:999px;
+  background:rgba(124,77,255,.14);color:var(--violet-2);border:1px solid rgba(124,77,255,.25);
+}
+
+/* =========================================================
+   TECH STACK
+   ========================================================= */
+.tech-badge{
+  display:flex;align-items:center;gap:10px;padding:16px 20px;font-weight:600;color:#fff;
+  font-size:.95rem;
+}
+.tech-badge i{font-size:1.3rem;color:var(--gold-2);}
+
+/* =========================================================
+   JOURNEY MAP (progression)
+   ========================================================= */
+.journey-col{display:flex;flex-direction:column;align-items:center;gap:0;max-width:340px;margin:0 auto;}
+.journey-node{
+  width:100%;padding:14px 22px;border-radius:14px;border:1px solid var(--line);
+  background:rgba(255,255,255,.04);color:var(--ink);text-align:center;font-weight:600;font-size:.94rem;
+  position:relative;z-index:2;
+}
+.journey-node.is-peak{
+  background:linear-gradient(120deg,var(--gold),var(--gold-2));color:#1a0f00;
+  box-shadow:0 14px 34px -10px rgba(245,166,35,.55);
+}
+.journey-connector{width:2px;height:26px;background:linear-gradient(var(--violet),var(--gold));opacity:.5;}
+
+/* =========================================================
+   SKILLS
+   ========================================================= */
+.skill-panel{padding:30px 26px;height:100%;}
+.skill-panel h4{color:var(--gold-2);font-family:'JetBrains Mono',monospace;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:18px;}
+.skill-panel ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;}
+.skill-panel li{color:var(--ink);font-size:.92rem;display:flex;align-items:center;gap:10px;}
+.skill-panel li i{color:var(--violet-2);font-size:.9rem;}
+
+/* =========================================================
+   PORTFOLIO
+   ========================================================= */
+.portfolio-item{padding:26px;text-align:center;height:100%;}
+.portfolio-item i{font-size:1.8rem;color:var(--gold-2);margin-bottom:14px;display:block;}
+.portfolio-item h5{color:#fff;font-size:1rem;margin-bottom:6px;}
+.portfolio-item p{color:var(--muted);font-size:.85rem;margin:0;}
+.portfolio-note{
+  text-align:center;max-width:640px;margin:50px auto 0;color:var(--muted);font-size:1.02rem;
+  border-top:1px solid var(--line);padding-top:34px;
+}
+.portfolio-note strong{color:#fff;}
+
+/* =========================================================
+   CERTIFICATE
+   ========================================================= */
+.cert-card{
+  border-radius:24px;padding:46px 36px;text-align:center;position:relative;overflow:hidden;
+  background:linear-gradient(160deg,var(--purple-2),var(--navy-2));
+  border:1px solid rgba(245,166,35,.25);
+}
+.cert-card::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(45deg, rgba(255,255,255,.02) 0 2px, transparent 2px 22px);
+}
+.cert-seal{
+  width:70px;height:70px;border-radius:50%;margin:0 auto 20px;
+  background:linear-gradient(135deg,var(--gold),var(--violet));
+  display:flex;align-items:center;justify-content:center;font-size:1.7rem;color:#fff;
+  box-shadow:0 0 0 6px rgba(245,166,35,.12);
+}
+.cert-card h3{color:#fff;font-size:1.5rem;margin-bottom:6px;position:relative;}
+.cert-card .cert-sub{color:var(--gold-2);font-family:'JetBrains Mono',monospace;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:22px;position:relative;}
+.cert-card p{color:var(--muted);position:relative;max-width:480px;margin:0 auto 26px;}
+
+/* modal (certificate + project) */
+.nx-modal-backdrop{
+  position:fixed;inset:0;background:rgba(5,4,14,.75);backdrop-filter:blur(6px);
+  z-index:1300;display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .3s ease;
+}
+.nx-modal-backdrop.show{opacity:1;pointer-events:auto;}
+.nx-modal{
+  background:linear-gradient(160deg,#1B1032,#0E0A1F);border:1px solid var(--line);
+  border-radius:22px;max-width:520px;width:100%;padding:36px;position:relative;
+  transform:translateY(20px) scale(.97);transition:transform .35s ease;
+  max-height:86vh;overflow-y:auto;
+}
+.nx-modal-backdrop.show .nx-modal{transform:translateY(0) scale(1);}
+.nx-modal-close{
+  position:absolute;top:18px;right:18px;background:rgba(255,255,255,.06);border:none;
+  width:34px;height:34px;border-radius:50%;color:#fff;font-size:1.1rem;cursor:pointer;
+}
+.nx-modal h4{color:#fff;font-size:1.35rem;margin-bottom:6px;}
+.nx-modal .modal-tag{color:var(--gold-2);font-family:'JetBrains Mono',monospace;font-size:.8rem;text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;display:block;}
+.nx-modal p{color:var(--muted);line-height:1.7;}
+.nx-modal .modal-tags{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0;}
+.nx-modal .modal-tags span{font-family:'JetBrains Mono',monospace;font-size:.75rem;padding:5px 12px;border-radius:999px;background:rgba(124,77,255,.16);color:var(--violet-2);}
+.nx-modal .modal-result{background:rgba(245,166,35,.08);border:1px solid rgba(245,166,35,.25);border-radius:12px;padding:14px 16px;font-size:.88rem;color:var(--ink);margin-top:10px;}
+
+/* certificate mockup image built from CSS only */
+.cert-mock{
+  background:linear-gradient(160deg,#fff,#F4F1FA);color:#241242;border-radius:16px;
+  padding:34px 26px;text-align:center;margin-bottom:20px;position:relative;
+}
+.cert-mock .cm-brand{font-family:'JetBrains Mono',monospace;font-size:.72rem;letter-spacing:.18em;color:#7C4DFF;text-transform:uppercase;}
+.cert-mock h5{font-family:'Sora',sans-serif;font-weight:700;margin:14px 0 4px;font-size:1.2rem;color:#1a0f2e;}
+.cert-mock .cm-name{font-size:1.5rem;font-weight:800;margin:14px 0;color:#241242;}
+.cert-mock .cm-course{font-size:.8rem;color:#6c6484;margin-bottom:10px;}
+.cert-mock .cm-stack{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:#7C4DFF;}
+.cert-mock hr{border-color:rgba(36,18,66,.15);margin:18px 0;}
+.cert-mock .cm-sign{display:flex;justify-content:space-between;font-size:.7rem;color:#6c6484;}
+
+/* =========================================================
+   VIBE CODING (dark accent section)
+   ========================================================= */
+.vibe-section{
+  background:linear-gradient(180deg,var(--navy-2),#050410);
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.vibe-flow{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin:40px 0;}
+.vibe-step{
+  font-family:'JetBrains Mono',monospace;font-size:.85rem;padding:12px 22px;border-radius:14px;
+  background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--ink);
+}
+.vibe-step.hot{border-color:rgba(245,166,35,.4);color:var(--gold-2);}
+.vibe-principle{
+  max-width:640px;margin:40px auto 0;text-align:center;color:var(--muted);font-size:1.05rem;
+  border-left:2px solid var(--violet);padding-left:20px;text-align:left;
+}
+
+/* =========================================================
+   PARENTS
+   ========================================================= */
+.parent-item{display:flex;align-items:flex-start;gap:14px;padding:18px 0;border-bottom:1px solid var(--line);}
+.parent-item:last-child{border-bottom:none;}
+.parent-item i{color:var(--gold-2);font-size:1.1rem;margin-top:3px;}
+.parent-item span{color:var(--ink);font-size:.98rem;}
+.parent-quote{
+  font-size:1.15rem;color:#fff;font-weight:500;line-height:1.6;padding:34px;
+}
+
+/* =========================================================
+   FINAL PROJECT
+   ========================================================= */
+.idea-chip{
+  padding:18px 20px;text-align:center;font-weight:600;color:#fff;font-size:.95rem;
+  display:flex;align-items:center;gap:10px;justify-content:center;
+}
+.idea-chip i{color:var(--gold-2);font-size:1.2rem;}
+.build-flow{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:44px;}
+.build-flow .bf-step{
+  font-family:'JetBrains Mono',monospace;font-size:.78rem;padding:9px 16px;border-radius:10px;
+  background:rgba(124,77,255,.12);color:var(--violet-2);border:1px solid rgba(124,77,255,.25);
+}
+
+/* =========================================================
+   DEMO DAY
+   ========================================================= */
+.demo-day-card{padding:48px;text-align:center;background:linear-gradient(140deg,rgba(124,77,255,.14),rgba(245,166,35,.08));border:1px solid rgba(124,77,255,.3);}
+.demo-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin:36px 0;text-align:left;}
+.demo-step{display:flex;align-items:center;gap:10px;color:var(--ink);font-size:.9rem;}
+.demo-step b{
+  width:26px;height:26px;border-radius:50%;background:rgba(255,255,255,.08);
+  display:flex;align-items:center;justify-content:center;font-size:.78rem;flex-shrink:0;color:var(--gold-2);
+}
+
+/* =========================================================
+   STUDENT JOURNEY — signature interactive rail
+   ========================================================= */
+.journey-signature{
+  padding:130px 0;background:radial-gradient(ellipse at 50% 0%, rgba(124,77,255,.12), transparent 60%);
+}
+.sj-rail{
+  display:flex;align-items:center;justify-content:space-between;position:relative;
+  max-width:920px;margin:0 auto 60px;padding-top:10px;
+}
+.sj-rail::before{
+  content:'';position:absolute;top:15px;left:20px;right:20px;height:2px;background:rgba(255,255,255,.08);
+}
+.sj-line-fill{
+  position:absolute;top:15px;left:20px;height:2px;width:0%;
+  background:linear-gradient(90deg,var(--violet),var(--gold));
+  transition:width 1.4s cubic-bezier(.2,.8,.2,1);
+}
+.sj-stage{position:relative;flex:1;text-align:center;}
+.sj-stage-dot{
+  width:32px;height:32px;border-radius:50%;margin:0 auto 14px;position:relative;z-index:2;
+  background:var(--navy);border:2px solid rgba(255,255,255,.15);
+  display:flex;align-items:center;justify-content:center;font-size:.85rem;color:var(--muted-2);
+  transition:all .5s ease;
+}
+.sj-stage.lit .sj-stage-dot{
+  border-color:var(--gold);color:var(--gold-2);
+  box-shadow:0 0 0 6px rgba(245,166,35,.14),0 0 24px rgba(245,166,35,.4);
+}
+.sj-stage-label{
+  font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.06em;color:var(--muted-2);
+  transition:color .5s ease;
+}
+.sj-stage.lit .sj-stage-label{color:#fff;}
+@media (max-width:768px){
+  .sj-rail{flex-wrap:wrap;gap:24px 0;}
+  .sj-rail::before,.sj-line-fill{display:none;}
+  .sj-stage{flex:0 0 33%;}
+}
+.sj-final{
+  text-align:center;font-size:clamp(1.6rem,4.5vw,2.6rem);font-weight:800;color:#fff;line-height:1.2;
+  opacity:0;transform:translateY(20px);transition:opacity .8s ease, transform .8s ease;
+}
+.sj-final.in-view{opacity:1;transform:translateY(0);}
+.sj-final .accent{
+  background:linear-gradient(120deg,var(--gold),var(--gold-2));-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sj-brandline{text-align:center;margin-top:26px;font-family:'JetBrains Mono',monospace;color:var(--muted);letter-spacing:.1em;font-size:.85rem;}
+
+/* =========================================================
+   FAQ
+   ========================================================= */
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-q{
+  width:100%;text-align:left;background:none;border:none;color:#fff;font-size:1.05rem;font-weight:600;
+  padding:22px 4px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-family:'Sora',sans-serif;
+}
+.faq-q i{color:var(--gold-2);transition:transform .3s ease;font-size:1rem;flex-shrink:0;margin-left:16px;}
+.faq-item.open .faq-q i{transform:rotate(45deg);}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease;}
+.faq-a-inner{padding:0 4px 22px;color:var(--muted);line-height:1.7;}
+
+/* =========================================================
+   FINAL CTA
+   ========================================================= */
+.cta-final{
+  border-radius:28px;padding:70px 40px;text-align:center;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--purple-2),var(--navy-2));
+  border:1px solid rgba(124,77,255,.3);
+}
+.cta-final::before{
+  content:'';position:absolute;width:500px;height:500px;background:var(--gold);opacity:.14;
+  border-radius:50%;filter:blur(100px);top:-200px;right:-150px;
+}
+.cta-final h2{position:relative;color:#fff;font-size:clamp(1.9rem,4.5vw,3rem);margin-bottom:16px;}
+.cta-final p{position:relative;color:var(--muted);font-size:1.1rem;margin-bottom:34px;}
+.cta-final .hero-ctas{position:relative;justify-content:center;}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer{padding:60px 0 30px;border-top:1px solid var(--line);}
+.footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.footer-brand span{font-family:'Sora',sans-serif;font-weight:700;color:#fff;}
+footer p.desc{color:var(--muted);font-size:.9rem;max-width:280px;}
+.footer-col h6{color:#fff;font-family:'JetBrains Mono',monospace;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:16px;}
+.footer-col a{display:block;color:var(--muted);font-size:.92rem;margin-bottom:10px;transition:color .2s ease;}
+.footer-col a:hover{color:var(--gold-2);}
+.social-row{display:flex;gap:10px;margin-top:10px;}
+.social-row a{
+  width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--line);
+  display:flex;align-items:center;justify-content:center;color:var(--ink);transition:all .25s ease;
+}
+.social-row a:hover{background:var(--violet);border-color:var(--violet);color:#fff;transform:translateY(-3px);}
+.footer-bottom{border-top:1px solid var(--line);margin-top:40px;padding-top:24px;color:var(--muted-2);font-size:.85rem;text-align:center;}
+
+/* =========================================================
+   SCROLL REVEAL
+   ========================================================= */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease, transform .7s ease;}
+.reveal.in-view{opacity:1;transform:translateY(0);}
+
+@media (prefers-reduced-motion: reduce){
+  *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
+  html{scroll-behavior:auto;}
+}
+
+@media (max-width:576px){
+  .container-nx{padding:0 18px;}
+  .hero{padding-top:150px;}
+}
+</style>
+</head>
+<body>
+
+<!-- decorative background -->
+<div class="bg-orbs"><div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div></div>
+<div class="grain"></div>
+
+<!-- =========================================================
+     NAVBAR
+     ========================================================= -->
+<nav class="nx-navbar" id="navbar">
+  <div class="container-nx">
+    <a href="#top" class="nx-logo">
+      <span class="nx-logo-mark">OK</span>
+      <span>OKURMEN KIDS</span>
+    </a>
+
+    <div class="nx-nav-links" id="navLinks">
+      <a href="#about" data-key="nav.about">О программе</a>
+      <a href="#roadmap" data-key="nav.program">Программа</a>
+      <a href="#projects" data-key="nav.projects">Проекты</a>
+      <a href="#result" data-key="nav.result">Результат</a>
+      <a href="#faq" data-key="nav.faq">FAQ</a>
+    </div>
+
+    <div class="nx-right">
+      <div class="nx-lang-switch" role="group" aria-label="Language switch">
+        <button type="button" class="active" data-lang-btn="ru">RU</button>
+        <button type="button" data-lang-btn="kg">KG</button>
+      </div>
+      <a href="#cta" class="btn-nx btn-nx-primary btn-nx-nav-cta" data-key="nav.cta">Записаться</a>
+      <button class="nx-burger" id="burgerBtn" aria-label="Открыть меню"><i class="bi bi-list"></i></button>
+    </div>
+  </div>
+</nav>
+
+<div class="nx-overlay" id="mobileOverlay"></div>
+<div class="nx-mobile-panel" id="mobilePanel">
+  <button class="nx-mobile-close" id="mobileClose" aria-label="Закрыть меню"><i class="bi bi-x-lg"></i></button>
+  <a href="#about" data-key="nav.about">О программе</a>
+  <a href="#roadmap" data-key="nav.program">Программа</a>
+  <a href="#projects" data-key="nav.projects">Проекты</a>
+  <a href="#result" data-key="nav.result">Результат</a>
+  <a href="#faq" data-key="nav.faq">FAQ</a>
+  <a href="#cta" class="btn-nx btn-nx-primary" data-key="nav.cta">Записаться</a>
+</div>
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+<header class="hero" id="top">
+  <div class="container-nx">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="hero-badge"><i class="bi bi-stars"></i><span data-key="hero.badge">6 месяцев • от изучения к созданию</span></div>
+        <h1>
+          OKURMEN KIDS CLUB
+          <span class="hero-next">NEXT</span>
+        </h1>
+        <p class="hero-subtitle" data-key="hero.subtitle">Следующий уровень после базового IT-образования.</p>
+        <p class="hero-text" data-key="hero.text">6-месячная программа, где ребёнок не просто изучает технологии, а учится создавать полноценные цифровые продукты.</p>
+        <div class="hero-ctas">
+          <a href="#roadmap" class="btn-nx btn-nx-primary"><i class="bi bi-rocket-takeoff"></i><span data-key="hero.cta1">Узнать программу</span></a>
+          <a href="#cta" class="btn-nx btn-nx-ghost"><i class="bi bi-send"></i><span data-key="hero.cta2">Записаться на NEXT</span></a>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="hero-visual">
+          <div class="float-card fc-react"><i class="bi bi-lightning-charge-fill"></i> React</div>
+          <div class="float-card fc-python"><i class="bi bi-code-slash"></i> Python</div>
+          <div class="float-card fc-fastapi"><i class="bi bi-server"></i> FastAPI</div>
+          <div class="float-card fc-ai"><i class="bi bi-robot"></i> AI</div>
+
+          <div class="nx-dashboard">
+            <div class="nx-dashboard-bar">
+              <span></span><span></span><span></span>
+              <span class="nx-dashboard-title">next_product.py</span>
+            </div>
+            <div class="nx-dashboard-body">
+              <div class="nx-code-line"><span class="nx-code-fn">class</span> <span class="nx-code-key">OwnProduct</span>:</div>
+              <div class="nx-code-line">&nbsp;&nbsp;stack = [<span class="nx-code-str">"React"</span>, <span class="nx-code-str">"Python"</span>,</div>
+              <div class="nx-code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx-code-str">"FastAPI"</span>, <span class="nx-code-str">"PostgreSQL"</span>,</div>
+              <div class="nx-code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx-code-str">"AI"</span>, <span class="nx-code-str">"GitHub"</span>]</div>
+              <br>
+              <div class="nx-code-line">&nbsp;&nbsp;<span class="nx-code-fn">def</span> <span class="nx-code-key">build</span>(self):</div>
+              <div class="nx-code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="nx-code-fn">return</span> <span class="nx-code-str">"🚀 launched"</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- =========================================================
+     QUICK STATS
+     ========================================================= -->
+<section class="stats-strip">
+  <div class="container-nx">
+    <div class="row g-4">
+      <div class="col-6 col-md-3 stat-item reveal">
+        <div class="stat-num" data-counter="6">0</div>
+        <div class="stat-label" data-key="stats.months">месяцев</div>
+      </div>
+      <div class="col-6 col-md-3 stat-item reveal">
+        <div class="stat-num" data-counter="6">0</div>
+        <div class="stat-label" data-key="stats.stages">этапов</div>
+      </div>
+      <div class="col-6 col-md-3 stat-item reveal">
+        <div class="stat-num" data-counter="5" data-suffix="+">0</div>
+        <div class="stat-label" data-key="stats.projects">реальных проектов</div>
+      </div>
+      <div class="col-6 col-md-3 stat-item reveal">
+        <div class="stat-num" data-counter="1">0</div>
+        <div class="stat-label" data-key="stats.product">финальный продукт</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     WHY NEXT
+     ========================================================= -->
+<section id="about">
+  <div class="container-nx">
+    <div class="section-head text-center reveal">
+      <div class="eyebrow"><i class="bi bi-question-circle"></i><span data-key="why.eyebrow">Зачем NEXT?</span></div>
+      <h2 class="section-title mx-auto" data-key="why.title">Почему ребёнку нужен NEXT?</h2>
+      <p class="section-sub mx-auto" data-key="why.sub">Программа построена как настоящий путь разработчика — от теории к готовому продукту.</p>
+    </div>
+
+    <div class="flow-rail reveal">
+      <span class="flow-step" data-key="why.flow1">УЧИТЬСЯ</span>
+      <i class="bi bi-arrow-right flow-arrow"></i>
+      <span class="flow-step" data-key="why.flow2">ПРАКТИКОВАТЬСЯ</span>
+      <i class="bi bi-arrow-right flow-arrow"></i>
+      <span class="flow-step" data-key="why.flow3">СОЗДАВАТЬ</span>
+      <i class="bi bi-arrow-right flow-arrow"></i>
+      <span class="flow-step is-final" data-key="why.flow4">ПРЕЗЕНТОВАТЬ</span>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="glass-card why-card">
+          <div class="why-icon"><i class="bi bi-cpu"></i></div>
+          <h4 data-key="why.c1.title">Закрепление знаний</h4>
+          <p data-key="why.c1.text">Ребёнок повторяет фундаментальные технологии и применяет их на практике.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="glass-card why-card">
+          <div class="why-icon"><i class="bi bi-code-slash"></i></div>
+          <h4 data-key="why.c2.title">Современные технологии</h4>
+          <p data-key="why.c2.text">React, FastAPI, GitHub и AI — тот стек, с которым работают настоящие команды.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="glass-card why-card">
+          <div class="why-icon"><i class="bi bi-rocket-takeoff"></i></div>
+          <h4 data-key="why.c3.title">Реальные проекты</h4>
+          <p data-key="why.c3.text">Каждый этап заканчивается практическим результатом, а не тестом.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="glass-card why-card">
+          <div class="why-icon"><i class="bi bi-robot"></i></div>
+          <h4 data-key="why.c4.title">AI</h4>
+          <p data-key="why.c4.text">Ребёнок учится использовать AI как инструмент разработчика, а не как замену мышлению.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="glass-card why-card">
+          <div class="why-icon"><i class="bi bi-bullseye"></i></div>
+          <h4 data-key="why.c5.title">Самостоятельность</h4>
+          <p data-key="why.c5.text">Постепенный переход от готовых заданий к собственным решениям.</p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4 reveal">
+        <div class="glass-card why-card">
+          <div class="why-icon"><i class="bi bi-github"></i></div>
+          <h4 data-key="why.c6.title">Portfolio</h4>
+          <p data-key="why.c6.text">Проекты сохраняются в GitHub и формируют первое IT-портфолио.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     ROADMAP
+     ========================================================= -->
+<section id="roadmap">
+  <div class="container-nx">
+    <div class="section-head text-center reveal">
+      <div class="eyebrow"><i class="bi bi-map"></i><span data-key="road.eyebrow">Путь программы</span></div>
+      <h2 class="section-title mx-auto" data-key="road.title">6 месяцев → 6 этапов</h2>
+      <p class="section-sub mx-auto" data-key="road.sub">Каждый месяц — новая технология и новый практический результат.</p>
+    </div>
+
+    <!-- desktop horizontal rail -->
+    <div class="roadmap-rail-desktop reveal">
+      <div class="roadmap-line"></div>
+      <div class="roadmap-track">
+
+        <div class="roadmap-node">
+          <div class="roadmap-dot"></div>
+          <div class="glass-card roadmap-card" data-modal="rm1">
+            <span class="roadmap-num">01</span>
+            <h4 data-key="road.s1.title">WEB RESTART</h4>
+            <span class="rm-tag">HTML + CSS + JavaScript</span>
+            <p data-key="road.s1.text">Повторяем фундамент и создаём интерактивные веб-приложения.</p>
+            <div class="roadmap-project"><i class="bi bi-box-seam"></i><span data-key="road.s1.project">Interactive Web App</span></div>
+          </div>
+        </div>
+
+        <div class="roadmap-node">
+          <div class="roadmap-dot"></div>
+          <div class="glass-card roadmap-card" data-modal="rm2">
+            <span class="roadmap-num">02</span>
+            <h4 data-key="road.s2.title">REACT</h4>
+            <span class="rm-tag" data-key="road.s2.tag">Modern Frontend</span>
+            <p data-key="road.s2.text">Components, JSX, Props, State, Events, Forms, API.</p>
+            <div class="roadmap-project"><i class="bi bi-box-seam"></i><span data-key="road.s2.project">React Application</span></div>
+          </div>
+        </div>
+
+        <div class="roadmap-node">
+          <div class="roadmap-dot"></div>
+          <div class="glass-card roadmap-card" data-modal="rm3">
+            <span class="roadmap-num">03</span>
+            <h4 data-key="road.s3.title">REACT PRO</h4>
+            <span class="rm-tag" data-key="road.s3.tag">Advanced Frontend</span>
+            <p data-key="road.s3.text">Router, API, Authentication, Context, Architecture, Deploy.</p>
+            <div class="roadmap-project"><i class="bi bi-box-seam"></i><span data-key="road.s3.project">Large Frontend Project</span></div>
+          </div>
+        </div>
+
+        <div class="roadmap-node">
+          <div class="roadmap-dot"></div>
+          <div class="glass-card roadmap-card" data-modal="rm4">
+            <span class="roadmap-num">04</span>
+            <h4 data-key="road.s4.title">PYTHON RESTART</h4>
+            <span class="rm-tag">Python + OOP</span>
+            <p data-key="road.s4.text">Functions, структуры данных, файлы, модули, ООП.</p>
+            <div class="roadmap-project"><i class="bi bi-box-seam"></i><span data-key="road.s4.project">Python App / Telegram Bot</span></div>
+          </div>
+        </div>
+
+        <div class="roadmap-node">
+          <div class="roadmap-dot"></div>
+          <div class="glass-card roadmap-card" data-modal="rm5">
+            <span class="roadmap-num">05</span>
+            <h4>FASTAPI</h4>
+            <span class="rm-tag" data-key="road.s5.tag">Backend + Full-Stack</span>
+            <p data-key="road.s5.text">FastAPI, REST API, PostgreSQL, SQLAlchemy, Authentication.</p>
+            <div class="roadmap-project"><i class="bi bi-box-seam"></i><span data-key="road.s5.project">Full-Stack Application</span></div>
+          </div>
+        </div>
+
+        <div class="roadmap-node">
+          <div class="roadmap-dot"></div>
+          <div class="glass-card roadmap-card" data-modal="rm6">
+            <span class="roadmap-num">06</span>
+            <h4 data-key="road.s6.title">VIBE CODING</h4>
+            <span class="rm-tag" data-key="road.s6.tag">AI-assisted Development</span>
+            <p data-key="road.s6.text">AI-инструменты, Prompt Engineering, отладка с AI, свой продукт.</p>
+            <div class="roadmap-project"><i class="bi bi-trophy"></i><span data-key="road.s6.project">YOUR OWN PRODUCT 🚀</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- mobile vertical list -->
+    <div class="roadmap-mobile">
+      <div class="glass-card roadmap-card reveal" data-modal="rm1"><span class="roadmap-num">01</span><h4 data-key="road.s1.title">WEB RESTART</h4><span class="rm-tag">HTML + CSS + JavaScript</span><p data-key="road.s1.text">Повторяем фундамент и создаём интерактивные веб-приложения.</p><div class="roadmap-project"><i class="bi bi-box-seam"></i><span data-key="road.s1.project">Interactive Web App</span></div></div>
+      <div class="glass-card roadmap-card reveal" data-modal="rm2"><span class="roadmap-num">02</span><h4 data-key="road.s2.title">REACT</h4><span class="rm-tag" data-key="road.s2.tag">Modern Frontend</span><p data-key="road.s2.text">Components, JSX, Props, State, Events, Forms, API.</p><div class="roadmap-project"><i class="bi bi-box-seam"></i><span data-key="road.s2.project">React Application</span></div></div>
+      <div class="glass-card roadmap-card reveal" data-modal="rm3"><span class="roadmap-num">03</span><h4 data-key="road.s3.title">REACT PRO</h4><span class="rm-tag" data-key="road.s3.tag">Advanced Frontend</span><p data-key="road.s3.text">Router, API, Authentication, Context, Architecture, Deploy.</p><div class="roadmap-project"><i class="bi bi-box-seam"></i><span data-key="road.s3.project">Large Frontend Project</span></div></div>
+      <div class="glass-card roadmap-card reveal" data-modal="rm4"><span class="roadmap-num">04</span><h4 data-key="road.s4.title">PYTHON RESTART</h4><span class="rm-tag">Python + OOP</span><p data-key="road.s4.text">Functions, структуры данных, файлы, модули, ООП.</p><div class="roadmap-project"><i class="bi bi-box-seam"></i><span data-key="road.s4.project">Python App / Telegram Bot</span></div></div>
+      <div class="glass-card roadmap-card reveal" data-modal="rm5"><span class="roadmap-num">05</span><h4>FASTAPI</h4><span class="rm-tag" data-key="road.s5.tag">Backend + Full-Stack</span><p data-key="road.s5.text">FastAPI, REST API, PostgreSQL, SQLAlchemy, Authentication.</p><div class="roadmap-project"><i class="bi bi-box-seam"></i><span data-key="road.s5.project">Full-Stack Application</span></div></div>
+      <div class="glass-card roadmap-card reveal" data-modal="rm6"><span class="roadmap-num">06</span><h4 data-key="road.s6.title">VIBE CODING</h4><span class="rm-tag" data-key="road.s6.tag">AI-assisted Development</span><p data-key="road.s6.text">AI-инструменты, Prompt Engineering, отладка с AI, свой продукт.</p><div class="roadmap-project"><i class="bi bi-trophy"></i><span data-key="road.s6.project">YOUR OWN PRODUCT 🚀</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     PROJECTS
+     ========================================================= -->
+<section id="projects">
+  <div class="container-nx">
+    <div class="section-head text-center reveal">
+      <div class="eyebrow"><i class="bi bi-laptop"></i><span data-key="proj.eyebrow">Практика</span></div>
+      <h2 class="section-title mx-auto" data-key="proj.title">Что создаёт ребёнок?</h2>
+      <p class="section-sub mx-auto" data-key="proj.sub">Пять проектов, которые превращаются в настоящее портфолио.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="glass-card project-card" data-modal="pr1">
+          <div class="project-thumb"><i class="bi bi-window-stack"></i></div>
+          <div class="project-body">
+            <h4 data-key="proj.p1.title">Interactive Web App</h4>
+            <p data-key="proj.p1.text">Первое полноценное интерактивное веб-приложение.</p>
+            <div class="project-tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="glass-card project-card" data-modal="pr2">
+          <div class="project-thumb"><i class="bi bi-lightning-charge"></i></div>
+          <div class="project-body">
+            <h4 data-key="proj.p2.title">React Application</h4>
+            <p data-key="proj.p2.text">Современный frontend на компонентах и state.</p>
+            <div class="project-tags"><span>React</span><span>JSX</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="glass-card project-card" data-modal="pr3">
+          <div class="project-thumb"><i class="bi bi-telegram"></i></div>
+          <div class="project-body">
+            <h4 data-key="proj.p3.title">Telegram Bot</h4>
+            <p data-key="proj.p3.text">Бот на Python, решающий реальную задачу.</p>
+            <div class="project-tags"><span>Python</span><span>OOP</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="glass-card project-card" data-modal="pr4">
+          <div class="project-thumb"><i class="bi bi-hdd-network"></i></div>
+          <div class="project-body">
+            <h4 data-key="proj.p4.title">Full-Stack Platform</h4>
+            <p data-key="proj.p4.text">React + FastAPI + PostgreSQL в одном продукте.</p>
+            <div class="project-tags"><span>React</span><span>FastAPI</span><span>PostgreSQL</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="glass-card project-card" data-modal="pr5">
+          <div class="project-thumb"><i class="bi bi-robot"></i></div>
+          <div class="project-body">
+            <h4 data-key="proj.p5.title">AI Assistant</h4>
+            <p data-key="proj.p5.text">Продукт, созданный в стиле Vibe Coding с помощью AI.</p>
+            <div class="project-tags"><span>AI</span><span>Vibe Coding</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     TECH STACK
+     ========================================================= -->
+<section id="tech">
+  <div class="container-nx">
+    <div class="section-head text-center reveal">
+      <div class="eyebrow"><i class="bi bi-boxes"></i><span data-key="tech.eyebrow">Инструменты</span></div>
+      <h2 class="section-title mx-auto" data-key="tech.title">Technologies</h2>
+    </div>
+    <div class="row g-3 justify-content-center">
+      <div class="col-6 col-md-3 reveal"><div class="glass-card tech-badge"><i class="bi bi-filetype-html"></i>HTML5</div></div>
+      <div class="col-6 col-md-3 reveal"><div class="glass-card tech-badge"><i class="bi bi-filetype-css"></i>CSS3</div></div>
+      <div class="col-6 col-md-3 reveal"><div class="glass-card tech-badge"><i class="bi bi-filetype-js"></i>JavaScript</div></div>
+      <div class="col-6 col-md-3 reveal"><div class="glass-card tech-badge"><i class="bi bi-lightning-charge"></i>React</div></div>
+      <div class="col-6 col-md-3 reveal"><div class="glass-card tech-badge"><i class="bi bi-filetype-py"></i>Python</div></div>
+      <div class="col-6 col-md-3 reveal"><div class="glass-card tech-badge"><i class="bi bi-server"></i>FastAPI</div></div>
+      <div class="col-6 col-md-3 reveal"><div class="glass-card tech-badge"><i class="bi bi-database"></i>PostgreSQL</div></div>
+      <div class="col-6 col-md-3 reveal"><div class="glass-card tech-badge"><i class="bi bi-github"></i>GitHub</div></div>
+      <div class="col-6 col-md-3 reveal"><div class="glass-card tech-badge"><i class="bi bi-robot"></i>AI</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     DEVELOPMENT JOURNEY (progression map)
+     ========================================================= -->
+<section>
+  <div class="container-nx">
+    <div class="section-head text-center reveal">
+      <div class="eyebrow"><i class="bi bi-signpost-split"></i><span data-key="prog.eyebrow">Прогресс</span></div>
+      <h2 class="section-title mx-auto" data-key="prog.title">Development Journey</h2>
+    </div>
+    <div class="journey-col reveal">
+      <div class="journey-node">HTML / CSS / JS</div>
+      <div class="journey-connector"></div>
+      <div class="journey-node">React</div>
+      <div class="journey-connector"></div>
+      <div class="journey-node">React Pro</div>
+      <div class="journey-connector"></div>
+      <div class="journey-node">Python</div>
+      <div class="journey-connector"></div>
+      <div class="journey-node">FastAPI</div>
+      <div class="journey-connector"></div>
+      <div class="journey-node">Full-Stack</div>
+      <div class="journey-connector"></div>
+      <div class="journey-node">AI</div>
+      <div class="journey-connector"></div>
+      <div class="journey-node is-peak"><i class="bi bi-trophy-fill me-2"></i>OWN PRODUCT</div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     SKILLS
+     ========================================================= -->
+<section id="result">
+  <div class="container-nx">
+    <div class="section-head text-center reveal">
+      <div class="eyebrow"><i class="bi bi-award"></i><span data-key="skills.eyebrow">Результат</span></div>
+      <h2 class="section-title mx-auto" data-key="skills.title">Что умеет выпускник NEXT?</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3 reveal">
+        <div class="glass-card skill-panel">
+          <h4 data-key="skills.tech">Tech Skills</h4>
+          <ul>
+            <li><i class="bi bi-check-circle-fill"></i>HTML</li>
+            <li><i class="bi bi-check-circle-fill"></i>CSS</li>
+            <li><i class="bi bi-check-circle-fill"></i>JavaScript</li>
+            <li><i class="bi bi-check-circle-fill"></i>React</li>
+            <li><i class="bi bi-check-circle-fill"></i>Python</li>
+            <li><i class="bi bi-check-circle-fill"></i>FastAPI</li>
+            <li><i class="bi bi-check-circle-fill"></i>PostgreSQL</li>
+            <li><i class="bi bi-check-circle-fill"></i>GitHub</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal">
+        <div class="glass-card skill-panel">
+          <h4 data-key="skills.ai">AI Skills</h4>
+          <ul>
+            <li><i class="bi bi-check-circle-fill"></i><span data-key="skills.ai1">AI Tools</span></li>
+            <li><i class="bi bi-check-circle-fill"></i>Prompt Engineering</li>
+            <li><i class="bi bi-check-circle-fill"></i>Vibe Coding</li>
+            <li><i class="bi bi-check-circle-fill"></i><span data-key="skills.ai4">Debugging with AI</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal">
+        <div class="glass-card skill-panel">
+          <h4 data-key="skills.project">Project Skills</h4>
+          <ul>
+            <li><i class="bi bi-check-circle-fill"></i><span data-key="skills.pj1">Idea</span></li>
+            <li><i class="bi bi-check-circle-fill"></i><span data-key="skills.pj2">Development</span></li>
+            <li><i class="bi bi-check-circle-fill"></i><span data-key="skills.pj3">Testing</span></li>
+            <li><i class="bi bi-check-circle-fill"></i>Deploy</li>
+            <li><i class="bi bi-check-circle-fill"></i>Portfolio</li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3 reveal">
+        <div class="glass-card skill-panel">
+          <h4 data-key="skills.soft">Soft Skills</h4>
+          <ul>
+            <li><i class="bi bi-check-circle-fill"></i><span data-key="skills.sf1">Communication</span></li>
+            <li><i class="bi bi-check-circle-fill"></i><span data-key="skills.sf2">Teamwork</span></li>
+            <li><i class="bi bi-check-circle-fill"></i><span data-key="skills.sf3">Problem Solving</span></li>
+            <li><i class="bi bi-check-circle-fill"></i><span data-key="skills.sf4">Presentation</span></li>
+            <li><i class="bi bi-check-circle-fill"></i><span data-key="skills.sf5">Leadership</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     PORTFOLIO
+     ========================================================= -->
+<section>
+  <div class="container-nx">
+    <div class="section-head text-center reveal">
+      <div class="eyebrow"><i class="bi bi-briefcase"></i><span data-key="port.eyebrow">Не только диплом</span></div>
+      <h2 class="section-title mx-auto" data-key="port.title">Не только сертификат. Portfolio.</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-6 col-lg-2 reveal"><div class="glass-card portfolio-item"><i class="bi bi-github"></i><h5>GitHub</h5><p data-key="port.p1">проекты</p></div></div>
+      <div class="col-6 col-lg-2 reveal"><div class="glass-card portfolio-item"><i class="bi bi-globe2"></i><h5 data-key="port.p2h">Deploy</h5><p data-key="port.p2">рабочие сайты</p></div></div>
+      <div class="col-6 col-lg-2 reveal"><div class="glass-card portfolio-item"><i class="bi bi-window"></i><h5 data-key="port.p3h">Projects</h5><p data-key="port.p3">реальные приложения</p></div></div>
+      <div class="col-6 col-lg-2 reveal"><div class="glass-card portfolio-item"><i class="bi bi-camera-reels"></i><h5 data-key="port.p4h">Demo Day</h5><p data-key="port.p4">презентация</p></div></div>
+      <div class="col-6 col-lg-2 reveal"><div class="glass-card portfolio-item"><i class="bi bi-patch-check"></i><h5 data-key="port.p5h">Certificate</h5><p data-key="port.p5">подтверждение</p></div></div>
+    </div>
+    <div class="portfolio-note reveal">
+      <p data-key="port.note">К концу программы у ребёнка остаётся не только сертификат, но и <strong>реальные результаты его работы</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     CERTIFICATE
+     ========================================================= -->
+<section>
+  <div class="container-nx">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="cert-card reveal">
+          <div class="cert-seal"><i class="bi bi-patch-check-fill"></i></div>
+          <h3 data-key="cert.title">Certificate of Completion</h3>
+          <span class="cert-sub" data-key="cert.sub">OKURMEN KIDS CLUB — NEXT</span>
+          <p data-key="cert.text">Официальное подтверждение того, что ребёнок прошёл 6-месячную продвинутую IT-программу и создал собственный продукт.</p>
+          <button class="btn-nx btn-nx-primary" id="openCertModal" style="position:relative;">
+            <i class="bi bi-eye"></i><span data-key="cert.btn">Посмотреть сертификат</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     VIBE CODING
+     ========================================================= -->
+<section class="vibe-section">
+  <div class="container-nx">
+    <div class="section-head text-center reveal">
+      <div class="eyebrow"><i class="bi bi-cpu"></i><span data-key="vibe.eyebrow">Этап 06</span></div>
+      <h2 class="section-title mx-auto" data-key="vibe.title">Code + AI</h2>
+      <p class="section-sub mx-auto" data-key="vibe.sub">AI помогает создавать. Человек принимает решения.</p>
+    </div>
+    <div class="vibe-flow reveal">
+      <span class="vibe-step" data-key="vibe.f1">IDEA</span>
+      <span class="vibe-step" data-key="vibe.f2">PROMPT</span>
+      <span class="vibe-step hot" data-key="vibe.f3">AI</span>
+      <span class="vibe-step" data-key="vibe.f4">CODE</span>
+      <span class="vibe-step" data-key="vibe.f5">DEBUG</span>
+      <span class="vibe-step" data-key="vibe.f6">PRODUCT</span>
+    </div>
+    <p class="vibe-principle reveal" data-key="vibe.principle">Мы не учим детей слепо копировать код от AI. Мы учим использовать AI как инструмент разработчика.</p>
+  </div>
+</section>
+
+<!-- =========================================================
+     PARENTS
+     ========================================================= -->
+<section>
+  <div class="container-nx">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-5">
+        <div class="eyebrow"><i class="bi bi-people"></i><span data-key="par.eyebrow">Для родителей</span></div>
+        <h2 class="section-title" data-key="par.title">Что получает родитель?</h2>
+        <div class="glass-card parent-quote reveal">
+          <span data-key="par.quote">Родитель видит не только оценку, а реальный результат обучения.</span>
+        </div>
+      </div>
+      <div class="col-lg-7">
+        <div class="glass-card reveal" style="padding:14px 30px;">
+          <div class="parent-item"><i class="bi bi-graph-up-arrow"></i><span data-key="par.i1">Понятный прогресс ребёнка</span></div>
+          <div class="parent-item"><i class="bi bi-code-square"></i><span data-key="par.i2">Проекты ребёнка</span></div>
+          <div class="parent-item"><i class="bi bi-github"></i><span data-key="par.i3">GitHub</span></div>
+          <div class="parent-item"><i class="bi bi-briefcase"></i><span data-key="par.i4">Portfolio</span></div>
+          <div class="parent-item"><i class="bi bi-box-seam"></i><span data-key="par.i5">Финальный продукт</span></div>
+          <div class="parent-item"><i class="bi bi-easel"></i><span data-key="par.i6">Презентация</span></div>
+          <div class="parent-item"><i class="bi bi-patch-check"></i><span data-key="par.i7">Сертификат</span></div>
+          <div class="parent-item"><i class="bi bi-person-check"></i><span data-key="par.i8">Развитие самостоятельности</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FINAL PROJECT
+     ========================================================= -->
+<section>
+  <div class="container-nx">
+    <div class="section-head text-center reveal">
+      <div class="eyebrow"><i class="bi bi-flag"></i><span data-key="final.eyebrow">Финал программы</span></div>
+      <h2 class="section-title mx-auto" data-key="final.title">YOUR PRODUCT</h2>
+      <p class="section-sub mx-auto" data-key="final.sub">Ребёнок выбирает собственную идею и доводит её до готового продукта.</p>
+    </div>
+    <div class="row g-3 justify-content-center">
+      <div class="col-6 col-md-4 col-lg-2 reveal"><div class="glass-card idea-chip"><i class="bi bi-robot"></i><span data-key="final.i1">AI Assistant</span></div></div>
+      <div class="col-6 col-md-4 col-lg-2 reveal"><div class="glass-card idea-chip"><i class="bi bi-mortarboard"></i><span data-key="final.i2">Education Platform</span></div></div>
+      <div class="col-6 col-md-4 col-lg-2 reveal"><div class="glass-card idea-chip"><i class="bi bi-cart"></i><span data-key="final.i3">Online Store</span></div></div>
+      <div class="col-6 col-md-4 col-lg-2 reveal"><div class="glass-card idea-chip"><i class="bi bi-controller"></i><span data-key="final.i4">Game Platform</span></div></div>
+      <div class="col-6 col-md-4 col-lg-2 reveal"><div class="glass-card idea-chip"><i class="bi bi-cash-coin"></i><span data-key="final.i5">Finance App</span></div></div>
+      <div class="col-6 col-md-4 col-lg-2 reveal"><div class="glass-card idea-chip"><i class="bi bi-building"></i><span data-key="final.i6">School System</span></div></div>
+    </div>
+    <div class="build-flow reveal">
+      <span class="bf-step">IDEA</span><i class="bi bi-arrow-right flow-arrow"></i>
+      <span class="bf-step" data-key="final.b2">DESIGN</span><i class="bi bi-arrow-right flow-arrow"></i>
+      <span class="bf-step">FRONTEND</span><i class="bi bi-arrow-right flow-arrow"></i>
+      <span class="bf-step">BACKEND</span><i class="bi bi-arrow-right flow-arrow"></i>
+      <span class="bf-step" data-key="final.b5">DATABASE</span><i class="bi bi-arrow-right flow-arrow"></i>
+      <span class="bf-step">AI</span><i class="bi bi-arrow-right flow-arrow"></i>
+      <span class="bf-step">DEPLOY</span><i class="bi bi-arrow-right flow-arrow"></i>
+      <span class="bf-step">DEMO</span>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     DEMO DAY
+     ========================================================= -->
+<section>
+  <div class="container-nx">
+    <div class="glass-card demo-day-card reveal">
+      <div class="eyebrow" style="margin:0 auto 18px;"><i class="bi bi-camera-reels"></i><span data-key="demo.eyebrow">Финальное событие</span></div>
+      <h2 class="section-title" data-key="demo.title">Demo Day</h2>
+      <p class="section-sub mx-auto" data-key="demo.sub">В конце программы ребёнок представляет свой продукт перед аудиторией.</p>
+      <div class="demo-steps">
+        <div class="demo-step"><b>1</b><span data-key="demo.s1">Problem</span></div>
+        <div class="demo-step"><b>2</b><span data-key="demo.s2">Solution</span></div>
+        <div class="demo-step"><b>3</b><span data-key="demo.s3">Design</span></div>
+        <div class="demo-step"><b>4</b><span data-key="demo.s4">Technology</span></div>
+        <div class="demo-step"><b>5</b><span data-key="demo.s5">Live Demo</span></div>
+        <div class="demo-step"><b>6</b><span data-key="demo.s6">AI usage</span></div>
+        <div class="demo-step"><b>7</b><span data-key="demo.s7">Future plans</span></div>
+      </div>
+      <a href="#faq" class="btn-nx btn-nx-ghost"><i class="bi bi-info-circle"></i><span data-key="demo.btn">Подробнее о Demo Day</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     STUDENT JOURNEY — signature moment
+     ========================================================= -->
+<section class="journey-signature" id="journey">
+  <div class="container-nx">
+    <div class="section-head text-center reveal">
+      <div class="eyebrow"><i class="bi bi-signpost-2"></i><span data-key="sj.eyebrow">Student Journey</span></div>
+      <h2 class="section-title mx-auto" data-key="sj.title">Путь одного ученика</h2>
+    </div>
+
+    <div class="sj-rail" id="sjRail">
+      <div class="sj-line-fill" id="sjLineFill"></div>
+      <div class="sj-stage" data-stage="0"><div class="sj-stage-dot"><i class="bi bi-book"></i></div><div class="sj-stage-label" data-key="sj.st1">LEARN</div></div>
+      <div class="sj-stage" data-stage="1"><div class="sj-stage-dot"><i class="bi bi-hammer"></i></div><div class="sj-stage-label" data-key="sj.st2">BUILD</div></div>
+      <div class="sj-stage" data-stage="2"><div class="sj-stage-dot"><i class="bi bi-stars"></i></div><div class="sj-stage-label" data-key="sj.st3">CREATE</div></div>
+      <div class="sj-stage" data-stage="3"><div class="sj-stage-dot"><i class="bi bi-easel2"></i></div><div class="sj-stage-label" data-key="sj.st4">PRESENT</div></div>
+      <div class="sj-stage" data-stage="4"><div class="sj-stage-dot"><i class="bi bi-rocket-takeoff"></i></div><div class="sj-stage-label" data-key="sj.st5">NEXT LEVEL</div></div>
+    </div>
+
+    <div class="sj-final" id="sjFinal">
+      <span data-key="sj.line1">НЕ ПРОСТО ИЗУЧАЙ КОД.</span><br>
+      <span class="accent" data-key="sj.line2">СОЗДАЙ ЧТО-ТО СВОЁ.</span>
+    </div>
+    <div class="sj-brandline">OKURMEN KIDS CLUB — NEXT</div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FAQ
+     ========================================================= -->
+<section id="faq">
+  <div class="container-nx">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="section-head text-center reveal">
+          <div class="eyebrow"><i class="bi bi-patch-question"></i>FAQ</div>
+          <h2 class="section-title mx-auto" data-key="faq.title">Частые вопросы</h2>
+        </div>
+
+        <div class="reveal">
+          <div class="faq-item">
+            <button class="faq-q"><span data-key="faq.q1">Для какого возраста NEXT?</span><i class="bi bi-plus-lg"></i></button>
+            <div class="faq-a"><div class="faq-a-inner" data-key="faq.a1">10–17 лет.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q"><span data-key="faq.q2">Нужно ли знать программирование?</span><i class="bi bi-plus-lg"></i></button>
+            <div class="faq-a"><div class="faq-a-inner" data-key="faq.a2">Да, NEXT рассчитан на детей, которые уже прошли базовый IT-уровень.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q"><span data-key="faq.q3">Сколько длится программа?</span><i class="bi bi-plus-lg"></i></button>
+            <div class="faq-a"><div class="faq-a-inner" data-key="faq.a3">6 месяцев.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q"><span data-key="faq.q4">Что изучают?</span><i class="bi bi-plus-lg"></i></button>
+            <div class="faq-a"><div class="faq-a-inner" data-key="faq.a4">HTML, CSS, JavaScript, React, Python, FastAPI, PostgreSQL, GitHub и AI.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q"><span data-key="faq.q5">Будет ли реальный проект?</span><i class="bi bi-plus-lg"></i></button>
+            <div class="faq-a"><div class="faq-a-inner" data-key="faq.a5">Да — к финалу у ребёнка есть собственный продукт.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q"><span data-key="faq.q6">Будет ли сертификат?</span><i class="bi bi-plus-lg"></i></button>
+            <div class="faq-a"><div class="faq-a-inner" data-key="faq.a6">Да, после успешного завершения программы.</div></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-q"><span data-key="faq.q7">Что будет после NEXT?</span><i class="bi bi-plus-lg"></i></button>
+            <div class="faq-a"><div class="faq-a-inner" data-key="faq.a7">Hackathons, Startup Projects, Advanced IT и дальнейшее развитие.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FINAL CTA
+     ========================================================= -->
+<section id="cta">
+  <div class="container-nx">
+    <div class="cta-final reveal">
+      <h2 data-key="cta.title">Готов к следующему уровню?</h2>
+      <p data-key="cta.text">От первых строк кода — к собственному IT-продукту.</p>
+      <div class="hero-ctas">
+        <a href="#" class="btn-nx btn-nx-primary"><i class="bi bi-send"></i><span data-key="cta.btn1">Записаться на NEXT</span></a>
+        <a href="#roadmap" class="btn-nx btn-nx-ghost"><i class="bi bi-journal-bookmark"></i><span data-key="cta.btn2">Посмотреть программу</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+<footer>
+  <div class="container-nx">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="footer-brand"><span class="nx-logo-mark">OK</span><span>OKURMEN KIDS ACADEMY</span></div>
+        <p class="desc" data-key="footer.desc">OKURMEN KIDS CLUB — NEXT. Программа, где дети создают собственные IT-продукты.</p>
+        <div class="social-row">
+          <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+          <a href="#" aria-label="Telegram"><i class="bi bi-telegram"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="bi bi-whatsapp"></i></a>
+          <a href="#" aria-label="GitHub"><i class="bi bi-github"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2 footer-col">
+        <h6 data-key="footer.nav">Навигация</h6>
+        <a href="#about" data-key="nav.about">О программе</a>
+        <a href="#roadmap" data-key="nav.program">Программа</a>
+        <a href="#projects" data-key="nav.projects">Проекты</a>
+      </div>
+      <div class="col-6 col-lg-2 footer-col">
+        <h6 data-key="footer.more">Дальше</h6>
+        <a href="#result" data-key="nav.result">Результат</a>
+        <a href="#faq" data-key="nav.faq">FAQ</a>
+        <a href="#cta" data-key="nav.cta">Записаться</a>
+      </div>
+      <div class="col-lg-4 footer-col">
+        <h6 data-key="footer.contact">Контакты</h6>
+        <a href="#" data-key="footer.city">Бишкек, Кыргызстан</a>
+        <a href="mailto:info@okurmenkids.kg">info@okurmenkids.kg</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 OKURMEN KIDS ACADEMY · <span data-key="footer.rights">Все права защищены</span>
+    </div>
+  </div>
+</footer>
+
+<!-- =========================================================
+     MODALS
+     ========================================================= -->
+<div class="nx-modal-backdrop" id="modalBackdrop">
+  <div class="nx-modal" id="modalContent" role="dialog" aria-modal="true">
+    <button class="nx-modal-close" id="modalClose" aria-label="Закрыть"><i class="bi bi-x-lg"></i></button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<script>
+/* =========================================================================
+   OKURMEN KIDS CLUB — NEXT
+   Единый JS-модуль: переводы, навигация, анимации, модальные окна.
+   ========================================================================= */
+(function(){
+  "use strict";
+
+  /* ---------------------------------------------------------------------
+     1. СЛОВАРЬ ПЕРЕВОДОВ (RU / KG)
+     --------------------------------------------------------------------- */
+  const translations = {
+    ru: {
+      "nav.about":"О программе","nav.program":"Программа","nav.projects":"Проекты",
+      "nav.result":"Результат","nav.faq":"FAQ","nav.cta":"Записаться",
+      "hero.badge":"6 месяцев • от изучения к созданию",
+      "hero.subtitle":"Следующий уровень после базового IT-образования.",
+      "hero.text":"6-месячная программа, где ребёнок не просто изучает технологии, а учится создавать полноценные цифровые продукты.",
+      "hero.cta1":"Узнать программу","hero.cta2":"Записаться на NEXT",
+      "stats.months":"месяцев","stats.stages":"этапов","stats.projects":"реальных проектов","stats.product":"финальный продукт",
+      "why.eyebrow":"Зачем NEXT?","why.title":"Почему ребёнку нужен NEXT?",
+      "why.sub":"Программа построена как настоящий путь разработчика — от теории к готовому продукту.",
+      "why.flow1":"УЧИТЬСЯ","why.flow2":"ПРАКТИКОВАТЬСЯ","why.flow3":"СОЗДАВАТЬ","why.flow4":"ПРЕЗЕНТОВАТЬ",
+      "why.c1.title":"Закрепление знаний","why.c1.text":"Ребёнок повторяет фундаментальные технологии и применяет их на практике.",
+      "why.c2.title":"Современные технологии","why.c2.text":"React, FastAPI, GitHub и AI — тот стек, с которым работают настоящие команды.",
+      "why.c3.title":"Реальные проекты","why.c3.text":"Каждый этап заканчивается практическим результатом, а не тестом.",
+      "why.c4.title":"AI","why.c4.text":"Ребёнок учится использовать AI как инструмент разработчика, а не как замену мышлению.",
+      "why.c5.title":"Самостоятельность","why.c5.text":"Постепенный переход от готовых заданий к собственным решениям.",
+      "why.c6.title":"Portfolio","why.c6.text":"Проекты сохраняются в GitHub и формируют первое IT-портфолио.",
+      "road.eyebrow":"Путь программы","road.title":"6 месяцев → 6 этапов","road.sub":"Каждый месяц — новая технология и новый практический результат.",
+      "road.s1.title":"WEB RESTART","road.s1.text":"Повторяем фундамент и создаём интерактивные веб-приложения.","road.s1.project":"Interactive Web App",
+      "road.s2.title":"REACT","road.s2.tag":"Modern Frontend","road.s2.text":"Components, JSX, Props, State, Events, Forms, API.","road.s2.project":"React Application",
+      "road.s3.title":"REACT PRO","road.s3.tag":"Advanced Frontend","road.s3.text":"Router, API, Authentication, Context, Architecture, Deploy.","road.s3.project":"Large Frontend Project",
+      "road.s4.title":"PYTHON RESTART","road.s4.text":"Functions, структуры данных, файлы, модули, ООП.","road.s4.project":"Python App / Telegram Bot",
+      "road.s5.tag":"Backend + Full-Stack","road.s5.text":"FastAPI, REST API, PostgreSQL, SQLAlchemy, Authentication.","road.s5.project":"Full-Stack Application",
+      "road.s6.title":"VIBE CODING","road.s6.tag":"AI-assisted Development","road.s6.text":"AI-инструменты, Prompt Engineering, отладка с AI, свой продукт.","road.s6.project":"YOUR OWN PRODUCT 🚀",
+      "proj.eyebrow":"Практика","proj.title":"Что создаёт ребёнок?","proj.sub":"Пять проектов, которые превращаются в настоящее портфолио.",
+      "proj.p1.title":"Interactive Web App","proj.p1.text":"Первое полноценное интерактивное веб-приложение.",
+      "proj.p2.title":"React Application","proj.p2.text":"Современный frontend на компонентах и state.",
+      "proj.p3.title":"Telegram Bot","proj.p3.text":"Бот на Python, решающий реальную задачу.",
+      "proj.p4.title":"Full-Stack Platform","proj.p4.text":"React + FastAPI + PostgreSQL в одном продукте.",
+      "proj.p5.title":"AI Assistant","proj.p5.text":"Продукт, созданный в стиле Vibe Coding с помощью AI.",
+      "tech.eyebrow":"Инструменты","tech.title":"Technologies",
+      "prog.eyebrow":"Прогресс","prog.title":"Development Journey",
+      "skills.eyebrow":"Результат","skills.title":"Что умеет выпускник NEXT?",
+      "skills.tech":"Tech Skills","skills.ai":"AI Skills","skills.project":"Project Skills","skills.soft":"Soft Skills",
+      "skills.ai1":"AI Tools","skills.ai4":"Отладка с AI",
+      "skills.pj1":"Идея","skills.pj2":"Разработка","skills.pj3":"Тестирование",
+      "skills.sf1":"Коммуникация","skills.sf2":"Командная работа","skills.sf3":"Решение проблем","skills.sf4":"Презентация","skills.sf5":"Лидерство",
+      "port.eyebrow":"Не только диплом","port.title":"Не только сертификат. Portfolio.",
+      "port.p1":"проекты","port.p2h":"Deploy","port.p2":"рабочие сайты","port.p3h":"Projects","port.p3":"реальные приложения",
+      "port.p4h":"Demo Day","port.p4":"презентация","port.p5h":"Certificate","port.p5":"подтверждение",
+      "port.note":"К концу программы у ребёнка остаётся не только сертификат, но и <strong>реальные результаты его работы</strong>.",
+      "cert.title":"Certificate of Completion","cert.sub":"OKURMEN KIDS CLUB — NEXT",
+      "cert.text":"Официальное подтверждение того, что ребёнок прошёл 6-месячную продвинутую IT-программу и создал собственный продукт.",
+      "cert.btn":"Посмотреть сертификат",
+      "vibe.eyebrow":"Этап 06","vibe.title":"Code + AI","vibe.sub":"AI помогает создавать. Человек принимает решения.",
+      "vibe.f1":"IDEA","vibe.f2":"PROMPT","vibe.f3":"AI","vibe.f4":"CODE","vibe.f5":"DEBUG","vibe.f6":"PRODUCT",
+      "vibe.principle":"Мы не учим детей слепо копировать код от AI. Мы учим использовать AI как инструмент разработчика.",
+      "par.eyebrow":"Для родителей","par.title":"Что получает родитель?","par.quote":"Родитель видит не только оценку, а реальный результат обучения.",
+      "par.i1":"Понятный прогресс ребёнка","par.i2":"Проекты ребёнка","par.i3":"GitHub","par.i4":"Portfolio",
+      "par.i5":"Финальный продукт","par.i6":"Презентация","par.i7":"Сертификат","par.i8":"Развитие самостоятельности",
+      "final.eyebrow":"Финал программы","final.title":"YOUR PRODUCT","final.sub":"Ребёнок выбирает собственную идею и доводит её до готового продукта.",
+      "final.i1":"AI Assistant","final.i2":"Education Platform","final.i3":"Online Store","final.i4":"Game Platform","final.i5":"Finance App","final.i6":"School System",
+      "final.b2":"DESIGN","final.b5":"DATABASE",
+      "demo.eyebrow":"Финальное событие","demo.title":"Demo Day","demo.sub":"В конце программы ребёнок представляет свой продукт перед аудиторией.",
+      "demo.s1":"Problem","demo.s2":"Solution","demo.s3":"Design","demo.s4":"Technology","demo.s5":"Live Demo","demo.s6":"AI usage","demo.s7":"Future plans",
+      "demo.btn":"Подробнее о Demo Day",
+      "sj.eyebrow":"Student Journey","sj.title":"Путь одного ученика",
+      "sj.st1":"LEARN","sj.st2":"BUILD","sj.st3":"CREATE","sj.st4":"PRESENT","sj.st5":"NEXT LEVEL",
+      "sj.line1":"НЕ ПРОСТО ИЗУЧАЙ КОД.","sj.line2":"СОЗДАЙ ЧТО-ТО СВОЁ.",
+      "faq.title":"Частые вопросы",
+      "faq.q1":"Для какого возраста NEXT?","faq.a1":"10–17 лет.",
+      "faq.q2":"Нужно ли знать программирование?","faq.a2":"Да, NEXT рассчитан на детей, которые уже прошли базовый IT-уровень.",
+      "faq.q3":"Сколько длится программа?","faq.a3":"6 месяцев.",
+      "faq.q4":"Что изучают?","faq.a4":"HTML, CSS, JavaScript, React, Python, FastAPI, PostgreSQL, GitHub и AI.",
+      "faq.q5":"Будет ли реальный проект?","faq.a5":"Да — к финалу у ребёнка есть собственный продукт.",
+      "faq.q6":"Будет ли сертификат?","faq.a6":"Да, после успешного завершения программы.",
+      "faq.q7":"Что будет после NEXT?","faq.a7":"Hackathons, Startup Projects, Advanced IT и дальнейшее развитие.",
+      "cta.title":"Готов к следующему уровню?","cta.text":"От первых строк кода — к собственному IT-продукту.",
+      "cta.btn1":"Записаться на NEXT","cta.btn2":"Посмотреть программу",
+      "footer.desc":"OKURMEN KIDS CLUB — NEXT. Программа, где дети создают собственные IT-продукты.",
+      "footer.nav":"Навигация","footer.more":"Дальше","footer.contact":"Контакты","footer.city":"Бишкек, Кыргызстан","footer.rights":"Все права защищены"
+    },
+    kg: {
+      "nav.about":"Программа жөнүндө","nav.program":"Программа","nav.projects":"Долбоорлор",
+      "nav.result":"Жыйынтык","nav.faq":"Суроолор","nav.cta":"Катталуу",
+      "hero.badge":"6 ай • үйрөнүүдөн жаратууга чейин",
+      "hero.subtitle":"Негизги IT-билимден кийинки кийинки деңгээл.",
+      "hero.text":"6 айлык программа, анда бала жөн гана технологияларды үйрөнбөйт, а толук кандуу санарип продукттарды түзүүнү үйрөнөт.",
+      "hero.cta1":"Программа менен таанышуу","hero.cta2":"NEXT'ке катталуу",
+      "stats.months":"ай","stats.stages":"этап","stats.projects":"чыныгы долбоор","stats.product":"акыркы продукт",
+      "why.eyebrow":"Эмне үчүн NEXT?","why.title":"Балага эмне үчүн NEXT керек?",
+      "why.sub":"Программа чыныгы разработчиктин жолу катары түзүлгөн — теориядан даяр продуктка чейин.",
+      "why.flow1":"ҮЙРӨНҮҮ","why.flow2":"КОЛДОНУУ","why.flow3":"ЖАРАТУУ","why.flow4":"КӨРСӨТҮҮ",
+      "why.c1.title":"Билимди бекемдөө","why.c1.text":"Бала негизги технологияларды кайталайт жана аларды практикада колдонот.",
+      "why.c2.title":"Заманбап технологиялар","why.c2.text":"React, FastAPI, GitHub жана AI — чыныгы командалар колдонгон стек.",
+      "why.c3.title":"Чыныгы долбоорлор","why.c3.text":"Ар бир этап тест менен эмес, практикалык жыйынтык менен аяктайт.",
+      "why.c4.title":"AI","why.c4.text":"Бала AI'ды ойлонуунун ордуна эмес, разработчиктин куралы катары колдонууну үйрөнөт.",
+      "why.c5.title":"Өз алдынчалык","why.c5.text":"Даяр тапшырмалардан өз чечимдерине акырындык менен өтүү.",
+      "why.c6.title":"Portfolio","why.c6.text":"Долбоорлор GitHub'до сакталып, биринчи IT-портфолиону түзөт.",
+      "road.eyebrow":"Программанын жолу","road.title":"6 ай → 6 этап","road.sub":"Ар бир ай — жаңы технология жана жаңы практикалык жыйынтык.",
+      "road.s1.title":"WEB RESTART","road.s1.text":"Негизди кайталап, интерактивдүү веб-колдонмолорду түзөбүз.","road.s1.project":"Interactive Web App",
+      "road.s2.title":"REACT","road.s2.tag":"Заманбап Frontend","road.s2.text":"Components, JSX, Props, State, Events, Forms, API.","road.s2.project":"React Application",
+      "road.s3.title":"REACT PRO","road.s3.tag":"Кеңири Frontend","road.s3.text":"Router, API, Authentication, Context, Architecture, Deploy.","road.s3.project":"Чоң Frontend долбоору",
+      "road.s4.title":"PYTHON RESTART","road.s4.text":"Функциялар, дайын структуралары, файлдар, модулдар, ООП.","road.s4.project":"Python колдонмо / Telegram бот",
+      "road.s5.tag":"Backend + Full-Stack","road.s5.text":"FastAPI, REST API, PostgreSQL, SQLAlchemy, Authentication.","road.s5.project":"Full-Stack колдонмо",
+      "road.s6.title":"VIBE CODING","road.s6.tag":"AI менен иштөө","road.s6.text":"AI куралдары, Prompt Engineering, AI менен дебаг, өз продуктуң.","road.s6.project":"ӨЗ ПРОДУКТУҢ 🚀",
+      "proj.eyebrow":"Практика","proj.title":"Бала эмне жаратат?","proj.sub":"Чыныгы портфолиого айланган беш долбоор.",
+      "proj.p1.title":"Interactive Web App","proj.p1.text":"Биринчи толук кандуу интерактивдүү веб-колдонмо.",
+      "proj.p2.title":"React Application","proj.p2.text":"Компоненттер жана state негизиндеги заманбап frontend.",
+      "proj.p3.title":"Telegram Bot","proj.p3.text":"Чыныгы маселени чечүүчү Python бот.",
+      "proj.p4.title":"Full-Stack Platform","proj.p4.text":"React + FastAPI + PostgreSQL бир продуктта.",
+      "proj.p5.title":"AI Assistant","proj.p5.text":"Vibe Coding стилинде AI жардамы менен түзүлгөн продукт.",
+      "tech.eyebrow":"Куралдар","tech.title":"Technologies",
+      "prog.eyebrow":"Прогресс","prog.title":"Development Journey",
+      "skills.eyebrow":"Жыйынтык","skills.title":"NEXT бүтүрүүчүсү эмнени билет?",
+      "skills.tech":"Tech көндүмдөр","skills.ai":"AI көндүмдөр","skills.project":"Долбоор көндүмдөрү","skills.soft":"Soft көндүмдөр",
+      "skills.ai1":"AI куралдары","skills.ai4":"AI менен дебаг",
+      "skills.pj1":"Идея","skills.pj2":"Иштеп чыгуу","skills.pj3":"Тестирлөө",
+      "skills.sf1":"Баарлашуу","skills.sf2":"Командада иштөө","skills.sf3":"Маселе чечүү","skills.sf4":"Презентация","skills.sf5":"Лидерлик",
+      "port.eyebrow":"Диплом эле эмес","port.title":"Диплом эле эмес. Portfolio да.",
+      "port.p1":"долбоорлор","port.p2h":"Deploy","port.p2":"иштеп турган сайттар","port.p3h":"Projects","port.p3":"чыныгы колдонмолор",
+      "port.p4h":"Demo Day","port.p4":"презентация","port.p5h":"Certificate","port.p5":"тастыктама",
+      "port.note":"Программанын аягында балада сертификат эле эмес, <strong>чыныгы иштин натыйжалары</strong> да калат.",
+      "cert.title":"Бүтүрүү сертификаты","cert.sub":"OKURMEN KIDS CLUB — NEXT",
+      "cert.text":"Баланын 6 айлык алдыңкы IT-программаны бүтүрүп, өз продуктусун түзгөндүгүн ырастоочу документ.",
+      "cert.btn":"Сертификатты көрүү",
+      "vibe.eyebrow":"06-этап","vibe.title":"Code + AI","vibe.sub":"AI жаратууга жардам берет. Чечимди адам кабыл алат.",
+      "vibe.f1":"ИДЕЯ","vibe.f2":"PROMPT","vibe.f3":"AI","vibe.f4":"КОД","vibe.f5":"ДЕБАГ","vibe.f6":"ПРОДУКТ",
+      "vibe.principle":"Биз балдарды AI'дын кодун көчүрүп жазууга үйрөтпөйбүз. Биз AI'ды разработчиктин куралы катары колдонууга үйрөтөбүз.",
+      "par.eyebrow":"Ата-энелер үчүн","par.title":"Ата-эне эмне алат?","par.quote":"Ата-эне баа гана эмес, окутуунун чыныгы жыйынтыгын көрөт.",
+      "par.i1":"Баланын түшүнүктүү прогресси","par.i2":"Баланын долбоорлору","par.i3":"GitHub","par.i4":"Portfolio",
+      "par.i5":"Акыркы продукт","par.i6":"Презентация","par.i7":"Сертификат","par.i8":"Өз алдынчалыктын өнүгүшү",
+      "final.eyebrow":"Программанын финалы","final.title":"YOUR PRODUCT","final.sub":"Бала өз идеясын тандап, аны даяр продуктка чейин жеткирет.",
+      "final.i1":"AI Assistant","final.i2":"Билим берүү платформасы","final.i3":"Онлайн дүкөн","final.i4":"Оюн платформасы","final.i5":"Финансы колдонмо","final.i6":"Мектеп системасы",
+      "final.b2":"DESIGN","final.b5":"DATABASE",
+      "demo.eyebrow":"Акыркы иш-чара","demo.title":"Demo Day","demo.sub":"Программанын аягында бала өз продуктусун көрүүчүлөрдүн алдында көрсөтөт.",
+      "demo.s1":"Маселе","demo.s2":"Чечим","demo.s3":"Дизайн","demo.s4":"Технология","demo.s5":"Live Demo","demo.s6":"AI колдонуу","demo.s7":"Келечектеги пландар",
+      "demo.btn":"Demo Day жөнүндө көбүрөөк",
+      "sj.eyebrow":"Student Journey","sj.title":"Бир окуучунун жолу",
+      "sj.st1":"ҮЙРӨНҮҮ","sj.st2":"ТҮЗҮҮ","sj.st3":"ЖАРАТУУ","sj.st4":"КӨРСӨТҮҮ","sj.st5":"NEXT LEVEL",
+      "sj.line1":"ЖӨН ЭЛЕ КОД ҮЙРӨНБӨ.","sj.line2":"ӨЗҮҢДҮ ЖАРАТ.",
+      "faq.title":"Көп берилүүчү суроолор",
+      "faq.q1":"NEXT кайсы курактарга?","faq.a1":"10–17 жаш.",
+      "faq.q2":"Программалоону билиш керекпи?","faq.a2":"Ооба, NEXT негизги IT-деңгээлин өткөн балдарга арналган.",
+      "faq.q3":"Программа канча убакытка созулат?","faq.a3":"6 ай.",
+      "faq.q4":"Эмне үйрөнүшөт?","faq.a4":"HTML, CSS, JavaScript, React, Python, FastAPI, PostgreSQL, GitHub жана AI.",
+      "faq.q5":"Чыныгы долбоор болобу?","faq.a5":"Ооба — финалда балада өз продуктусу болот.",
+      "faq.q6":"Сертификат берилеби?","faq.a6":"Ооба, программаны ийгиликтүү бүтүргөндөн кийин.",
+      "faq.q7":"NEXT'тен кийин эмне болот?","faq.a7":"Hackathon'дор, Startup долбоорлор, Advanced IT жана андан аркы өнүгүү.",
+      "cta.title":"Кийинки деңгээлге даярсыңбы?","cta.text":"Биринчи код саптарынан — өз IT-продуктуңа чейин.",
+      "cta.btn1":"NEXT'ке катталуу","cta.btn2":"Программаны көрүү",
+      "footer.desc":"OKURMEN KIDS CLUB — NEXT. Балдар өз IT-продукттарын жаратуучу программа.",
+      "footer.nav":"Навигация","footer.more":"Андан ары","footer.contact":"Байланыш","footer.city":"Бишкек, Кыргызстан","footer.rights":"Бардык укуктар корголгон"
+    }
+  };
+
+  /* Данные для модальных окон (roadmap этапы + проекты) — по языкам */
+  const modalData = {
+    ru:{
+      rm1:{title:"WEB RESTART",tag:"Этап 01 · HTML + CSS + JS",text:"Повторяем фундамент веб-разработки и создаём интерактивные приложения на чистом JavaScript.",tags:["HTML","CSS","JavaScript"],result:"Результат: рабочее интерактивное веб-приложение."},
+      rm2:{title:"REACT",tag:"Этап 02 · Modern Frontend",text:"Погружаемся в компонентный подход: JSX, props, state, обработка событий, формы, работа с API.",tags:["React","JSX","State"],result:"Результат: собственное React-приложение."},
+      rm3:{title:"REACT PRO",tag:"Этап 03 · Advanced Frontend",text:"Router, авторизация, Context API, архитектура крупных приложений и деплой в продакшн.",tags:["Router","Auth","Deploy"],result:"Результат: большой frontend-проект в проде."},
+      rm4:{title:"PYTHON RESTART",tag:"Этап 04 · Python + OOP",text:"Функции, структуры данных, работа с файлами, модули и объектно-ориентированное программирование.",tags:["Python","OOP"],result:"Результат: Python-приложение или Telegram-бот."},
+      rm5:{title:"FASTAPI",tag:"Этап 05 · Backend + Full-Stack",text:"Строим REST API на FastAPI, подключаем PostgreSQL через SQLAlchemy, добавляем авторизацию и связываем с React.",tags:["FastAPI","PostgreSQL","SQLAlchemy"],result:"Результат: полноценное Full-Stack приложение."},
+      rm6:{title:"VIBE CODING",tag:"Этап 06 · AI-assisted Development",text:"Учимся работать с AI как инструментом: prompt engineering, отладка с AI, ускоренная разработка.",tags:["AI","Prompt Engineering"],result:"Результат: YOUR OWN PRODUCT 🚀"},
+      pr1:{title:"Interactive Web App",tag:"HTML / CSS / JS",text:"Первое полноценное интерактивное веб-приложение, построенное без фреймворков — фундамент понимания браузера.",tags:["HTML","CSS","JavaScript"],result:"Результат: рабочий сайт с интерактивом."},
+      pr2:{title:"React Application",tag:"Modern Frontend",text:"Приложение на React с компонентами, состоянием и работой с внешним API.",tags:["React","API"],result:"Результат: SPA-приложение на React."},
+      pr3:{title:"Telegram Bot",tag:"Python",text:"Бот на Python, решающий реальную повседневную задачу — от идеи до рабочего кода.",tags:["Python","aiogram"],result:"Результат: работающий Telegram-бот."},
+      pr4:{title:"Full-Stack Platform",tag:"React + FastAPI + PostgreSQL",text:"Полноценная платформа с фронтендом, бэкендом и базой данных, связанными в единую систему.",tags:["React","FastAPI","PostgreSQL"],result:"Результат: развёрнутая Full-Stack платформа."},
+      pr5:{title:"AI Assistant",tag:"AI + Vibe Coding",text:"Финальный продукт, созданный в стиле Vibe Coding — с AI как соразработчиком, но с решениями человека.",tags:["AI","Vibe Coding"],result:"Результат: YOUR OWN PRODUCT 🚀"}
+    },
+    kg:{
+      rm1:{title:"WEB RESTART",tag:"01-этап · HTML + CSS + JS",text:"Веб-иштеп чыгуунун негизин кайталап, таза JavaScript'те интерактивдүү колдонмолорду түзөбүз.",tags:["HTML","CSS","JavaScript"],result:"Жыйынтык: иштеп турган интерактивдүү веб-колдонмо."},
+      rm2:{title:"REACT",tag:"02-этап · Modern Frontend",text:"Компоненттик мамилеге киребиз: JSX, props, state, окуяларды иштетүү, формалар, API менен иштөө.",tags:["React","JSX","State"],result:"Жыйынтык: өз React-колдонмоң."},
+      rm3:{title:"REACT PRO",tag:"03-этап · Advanced Frontend",text:"Router, авторизация, Context API, чоң колдонмолордун архитектурасы жана продакшнга чыгаруу.",tags:["Router","Auth","Deploy"],result:"Жыйынтык: продакшндагы чоң frontend долбоор."},
+      rm4:{title:"PYTHON RESTART",tag:"04-этап · Python + OOP",text:"Функциялар, дайын структуралары, файлдар менен иштөө, модулдар жана объектиге багытталган программалоо.",tags:["Python","OOP"],result:"Жыйынтык: Python-колдонмо же Telegram-бот."},
+      rm5:{title:"FASTAPI",tag:"05-этап · Backend + Full-Stack",text:"FastAPI'де REST API курабыз, SQLAlchemy аркылуу PostgreSQL'ди туташтырабыз, авторизация кошуп, React менен байланыштырабыз.",tags:["FastAPI","PostgreSQL","SQLAlchemy"],result:"Жыйынтык: толук кандуу Full-Stack колдонмо."},
+      rm6:{title:"VIBE CODING",tag:"06-этап · AI-assisted Development",text:"AI менен курал катары иштөөнү үйрөнөбүз: prompt engineering, AI менен дебаг, тездетилген иштеп чыгуу.",tags:["AI","Prompt Engineering"],result:"Жыйынтык: ӨЗ ПРОДУКТУҢ 🚀"},
+      pr1:{title:"Interactive Web App",tag:"HTML / CSS / JS",text:"Фреймворксуз курулган биринчи толук кандуу интерактивдүү веб-колдонмо — браузерди түшүнүүнүн негизи.",tags:["HTML","CSS","JavaScript"],result:"Жыйынтык: интерактивдүү иштеп турган сайт."},
+      pr2:{title:"React Application",tag:"Modern Frontend",text:"Компоненттери, state'и жана тышкы API менен иштөөсү бар React колдонмо.",tags:["React","API"],result:"Жыйынтык: React'те курулган SPA-колдонмо."},
+      pr3:{title:"Telegram Bot",tag:"Python",text:"Идеядан иштеп турган кодго чейин — чыныгы күнүмдүк маселени чечүүчү Python бот.",tags:["Python","aiogram"],result:"Жыйынтык: иштеп турган Telegram-бот."},
+      pr4:{title:"Full-Stack Platform",tag:"React + FastAPI + PostgreSQL",text:"Frontend, backend жана маалымат базасы бирдиктүү системага бириктирилген толук платформа.",tags:["React","FastAPI","PostgreSQL"],result:"Жыйынтык: жайылтылган Full-Stack платформа."},
+      pr5:{title:"AI Assistant",tag:"AI + Vibe Coding",text:"Vibe Coding стилинде — AI биргелешип иштеген, бирок чечимдерди адам кабыл алган акыркы продукт.",tags:["AI","Vibe Coding"],result:"Жыйынтык: ӨЗ ПРОДУКТУҢ 🚀"}
+    }
+  };
+
+  let currentLang = 'ru';
+
+  /* ---------------------------------------------------------------------
+     2. RU / KG ПЕРЕКЛЮЧАТЕЛЬ (без перезагрузки страницы)
+     --------------------------------------------------------------------- */
+  function applyTranslations(lang){
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.documentElement.setAttribute('data-lang', lang);
+    const dict = translations[lang];
+    document.querySelectorAll('[data-key]').forEach(el=>{
+      const key = el.getAttribute('data-key');
+      if(dict[key] !== undefined){
+        el.innerHTML = dict[key];
+      }
+    });
+    document.querySelectorAll('[data-lang-btn]').forEach(btn=>{
+      btn.classList.toggle('active', btn.getAttribute('data-lang-btn') === lang);
+    });
+  }
+
+  document.querySelectorAll('[data-lang-btn]').forEach(btn=>{
+    btn.addEventListener('click', ()=> applyTranslations(btn.getAttribute('data-lang-btn')));
+  });
+
+  /* ---------------------------------------------------------------------
+     3. NAVBAR: scroll-эффект + активный пункт меню
+     --------------------------------------------------------------------- */
+  const navbar = document.getElementById('navbar');
+  const navLinkEls = document.querySelectorAll('.nx-nav-links a, .nx-mobile-panel a[href^="#"]');
+  const sections = ['about','roadmap','projects','result','faq'].map(id=>document.getElementById(id)).filter(Boolean);
+
+  function onScroll(){
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+
+    let activeId = null;
+    sections.forEach(sec=>{
+      const rect = sec.getBoundingClientRect();
+      if(rect.top <= 140 && rect.bottom >= 140){ activeId = sec.id; }
+    });
+    document.querySelectorAll('.nx-nav-links a').forEach(a=>{
+      a.classList.toggle('active', activeId && a.getAttribute('href') === '#'+activeId);
+    });
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* ---------------------------------------------------------------------
+     4. SMOOTH SCROLL для всех навигационных ссылок
+     --------------------------------------------------------------------- */
+  document.querySelectorAll('a[href^="#"]').forEach(link=>{
+    link.addEventListener('click', function(e){
+      const targetId = this.getAttribute('href');
+      if(targetId.length > 1){
+        const target = document.querySelector(targetId);
+        if(target){
+          e.preventDefault();
+          target.scrollIntoView({behavior:'smooth', block:'start'});
+          closeMobileMenu();
+        }
+      }
+    });
+  });
+
+  /* ---------------------------------------------------------------------
+     5. MOBILE MENU (burger)
+     --------------------------------------------------------------------- */
+  const burgerBtn = document.getElementById('burgerBtn');
+  const mobilePanel = document.getElementById('mobilePanel');
+  const mobileOverlay = document.getElementById('mobileOverlay');
+  const mobileClose = document.getElementById('mobileClose');
+
+  function openMobileMenu(){
+    mobilePanel.classList.add('open');
+    mobileOverlay.classList.add('show');
+  }
+  function closeMobileMenu(){
+    mobilePanel.classList.remove('open');
+    mobileOverlay.classList.remove('show');
+  }
+  burgerBtn.addEventListener('click', openMobileMenu);
+  mobileClose.addEventListener('click', closeMobileMenu);
+  mobileOverlay.addEventListener('click', closeMobileMenu);
+
+  /* ---------------------------------------------------------------------
+     6. SCROLL ANIMATIONS (IntersectionObserver) для .reveal
+     --------------------------------------------------------------------- */
+  const revealObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('in-view');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.15});
+  document.querySelectorAll('.reveal').forEach(el=> revealObserver.observe(el));
+
+  /* ---------------------------------------------------------------------
+     7. ANIMATED COUNTERS (6 месяцев / 6 этапов / 5+ проектов / 1 продукт)
+     --------------------------------------------------------------------- */
+  function animateCounter(el){
+    const target = parseInt(el.getAttribute('data-counter'), 10) || 0;
+    const suffix = el.getAttribute('data-suffix') || '';
+    const duration = 1200;
+    const start = performance.now();
+    function tick(now){
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1-progress, 3);
+      el.textContent = Math.round(eased * target) + suffix;
+      if(progress < 1){ requestAnimationFrame(tick); }
+    }
+    requestAnimationFrame(tick);
+  }
+  const counterObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.5});
+  document.querySelectorAll('[data-counter]').forEach(el=> counterObserver.observe(el));
+
+  /* ---------------------------------------------------------------------
+     8. FAQ ACCORDION
+     --------------------------------------------------------------------- */
+  document.querySelectorAll('.faq-item').forEach(item=>{
+    const q = item.querySelector('.faq-q');
+    const a = item.querySelector('.faq-a');
+    q.addEventListener('click', ()=>{
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(openItem=>{
+        if(openItem !== item){
+          openItem.classList.remove('open');
+          openItem.querySelector('.faq-a').style.maxHeight = null;
+        }
+      });
+      item.classList.toggle('open', !isOpen);
+      a.style.maxHeight = !isOpen ? (a.scrollHeight + 'px') : null;
+    });
+  });
+
+  /* ---------------------------------------------------------------------
+     9. МОДАЛЬНЫЕ ОКНА: roadmap-этапы, проекты, сертификат
+     --------------------------------------------------------------------- */
+  const modalBackdrop = document.getElementById('modalBackdrop');
+  const modalBody = document.getElementById('modalBody');
+  const modalClose = document.getElementById('modalClose');
+
+  function openModal(html){
+    modalBody.innerHTML = html;
+    modalBackdrop.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(){
+    modalBackdrop.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+  modalClose.addEventListener('click', closeModal);
+  modalBackdrop.addEventListener('click', (e)=>{ if(e.target === modalBackdrop) closeModal(); });
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
+
+  document.querySelectorAll('[data-modal]').forEach(card=>{
+    card.addEventListener('click', ()=>{
+      const key = card.getAttribute('data-modal');
+      const data = modalData[currentLang][key];
+      if(!data) return;
+      openModal(`
+        <span class="modal-tag">${data.tag}</span>
+        <h4>${data.title}</h4>
+        <p>${data.text}</p>
+        <div class="modal-tags">${data.tags.map(t=>`<span>${t}</span>`).join('')}</div>
+        <div class="modal-result"><i class="bi bi-check-circle-fill me-2"></i>${data.result}</div>
+      `);
+    });
+  });
+
+  /* Certificate modal — собственный mockup сертификата */
+  document.getElementById('openCertModal').addEventListener('click', ()=>{
+    openModal(`
+      <div class="cert-mock">
+        <div class="cm-brand">Okurmen Kids Academy</div>
+        <h5>Certificate of Completion</h5>
+        <div class="cm-course">OKURMEN KIDS CLUB — NEXT</div>
+        <div class="cm-name">[ STUDENT NAME ]</div>
+        <div class="cm-course">has successfully completed the 6-month Advanced IT Program</div>
+        <div class="cm-stack">HTML · CSS · JavaScript · React · Python · FastAPI · AI</div>
+        <hr>
+        <div class="cm-sign">
+          <span>Certificate ID: NX-2026-000</span>
+          <span>QR Verification</span>
+        </div>
+        <div class="cm-sign" style="margin-top:10px;">
+          <span>Program Director</span>
+          <span>Head Instructor</span>
+        </div>
+      </div>
+      <p style="text-align:center;color:var(--muted);font-size:.85rem;">Демонстрационный макет сертификата.</p>
+    `);
+  });
+
+  /* ---------------------------------------------------------------------
+     10. STUDENT JOURNEY — сигнатурная анимация (signature element)
+     --------------------------------------------------------------------- */
+  const sjRail = document.getElementById('sjRail');
+  const sjStages = document.querySelectorAll('.sj-stage');
+  const sjLineFill = document.getElementById('sjLineFill');
+  const sjFinal = document.getElementById('sjFinal');
+  let sjPlayed = false;
+
+  const sjObserver = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting && !sjPlayed){
+        sjPlayed = true;
+        sjStages.forEach((stage, i)=>{
+          setTimeout(()=>{
+            stage.classList.add('lit');
+            const pct = (i / (sjStages.length - 1)) * 100;
+            sjLineFill.style.width = pct + '%';
+            if(i === sjStages.length - 1){
+              setTimeout(()=> sjFinal.classList.add('in-view'), 400);
+            }
+          }, i * 450);
+        });
+        sjObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0.4});
+  if(sjRail) sjObserver.observe(sjRail);
+
+  /* ---------------------------------------------------------------------
+     Инициализация: язык по умолчанию — RU
+     --------------------------------------------------------------------- */
+  applyTranslations('ru');
+
+})();
+</script>
+</body>
+</html>
